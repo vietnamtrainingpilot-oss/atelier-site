@@ -1,115 +1,3 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
-}
-
-/* ---------- Lenis (smooth scroll) ---------- */
-/* Appended manually instead of importing lenis/dist/lenis.css to avoid
-   bundler path issues. Source: lenis v1 recommended stylesheet. */
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-body {
-  margin: 0;
-  background-color: var(--atelier-paper);
-  color: var(--atelier-ink);
-  font-family: var(--font-ui);
-  font-size: var(--step-0);
-  line-height: 1.6;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.06;
-  letter-spacing: -0.015em;
-  margin: 0;
-  text-wrap: balance;
-}
-
-p {
-  margin: 0;
-  text-wrap: pretty;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--atelier-mark);
-}
-
-button {
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
-code,
-kbd,
-pre {
-  font-family: var(--font-mono);
-  font-size: 0.92em;
-}
-
-img,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-::selection {
-  background: var(--mark-wash);
-  color: var(--mark-deep);
-}
-
-:focus-visible {
-  outline: 2px solid var(--atelier-mark);
-  outline-offset: 3px;
-  border-radius: 1px;
-}
-
 /* ---------- Layout primitives ---------- */
 
 .container {
@@ -142,50 +30,18 @@ svg {
   margin-top: var(--flow, 1rem);
 }
 
-/* ---------- Section elevation ---------- */
+/* ---------- Section coloring ---------- */
 
-.section--raised {
-  background: var(--paper-raised);
-  border-top: var(--rule);
-  border-bottom: var(--rule);
-}
-
-.section--muted {
+.section--dark {
   background: var(--paper-deep);
+  color: var(--atelier-ink);
+  padding-block: clamp(4rem, 9vw, 7rem);
 }
 
-/* ---------- Type helpers ---------- */
-
-.label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--atelier-muted);
-}
-
-.label--mark {
-  color: var(--atelier-mark);
-}
-
-.lede {
-  font-size: var(--step-1);
-  line-height: 1.5;
-  color: var(--ink-soft);
-  max-width: var(--measure);
-}
-
-.measure {
-  max-width: var(--measure);
-}
-
-.mono {
-  font-family: var(--font-mono);
-}
-
-.mark {
-  color: var(--atelier-mark);
+.section--light {
+  background: var(--atelier-paper);
+  color: var(--atelier-ink);
+  padding-block: clamp(4rem, 9vw, 7rem);
 }
 
 /* ---------- Buttons ---------- */
@@ -208,14 +64,13 @@ svg {
   text-transform: uppercase;
   transition: background-color 0.25s var(--ease-out),
     color 0.25s var(--ease-out), border-color 0.25s var(--ease-out),
-    transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+    transform 0.25s var(--ease-out);
 }
 
 .btn:hover {
   color: var(--btn-fg);
   border-color: var(--atelier-ink);
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px var(--mark-wash);
 }
 
 .btn--mark {
@@ -235,63 +90,34 @@ svg {
   padding-inline: 0.4em;
 }
 
-/* ---------- Paper grain ---------- */
+/* ---------- Layout primitives ---------- */
 
-.grain {
+.container {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--wide {
+  max-width: 1440px;
+}
+
+.section {
   position: relative;
+  padding-block: clamp(4rem, 9vw, 8.5rem);
 }
 
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.035;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+.section--tight {
+  padding-block: clamp(3rem, 6vw, 5.5rem);
 }
 
-.grain > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* ---------- Reveal states (armed only when JS + motion allowed) ---------- */
-
-@media (prefers-reduced-motion: no-preference) {
-  .js [data-reveal] {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .js [data-reveal-stagger] > * {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .js .reveal-type .reveal-type__inner {
-    transform: translateY(110%);
-  }
-}
-
-.reveal-type {
-  overflow: hidden;
-  display: block;
-}
-
-.reveal-type__inner {
-  display: block;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
+.hairline {
   border: 0;
+  border-top: var(--rule);
+  margin: 0;
+}
+
+.stack > * + * {
+  margin-top: var(--flow, 1rem);
 }
