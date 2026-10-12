@@ -1,0 +1,70 @@
+---
+import Base from "../layouts/Base.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import InstallBox from "../components/InstallBox.astro";
+import { BUNDLED, FETCHED, HOSTS, ROUTER_COUNT, TOTAL_DEPS, UNIQUE_SKILLS } from "../data/routers";
+import { SITE } from "../data/site";
+
+const flags = [
+  { flag: "--offline", effect: "Bundled skills only. Zero network requests." },
+  { flag: "--prefer-network", effect: "Refresh public skills from upstream even when a bundled copy exists." },
+  { flag: "--check", effect: "Report what would happen. Installs nothing." },
+  { flag: "--force", effect: "Overwrite existing skills." },
+  { flag: "--agent <name>", effect: "opencode · claude · cursor · codex · agents · windsurf · gemini" },
+  { flag: "--root <path>", effect: "Install somewhere else entirely." },
+  { flag: "--list", effect: "List routers and their dependency counts." },
+  { flag: "--json", effect: "Machine-readable summary on stdout." },
+  { flag: "--in-place", effect: "Install the routers into this repo instead of a skill root." },
+];
+
+const hosts = [
+  { host: "opencode", skills: "~/.config/opencode/skills", also: "plugin → ~/.config/opencode/plugins/atelier.ts; security agents → ~/.config/opencode/agent/" },
+  { host: "claude", skills: "~/.claude/skills", also: "security agents → ~/.claude/agents/; the .claude-plugin/ manifest registers it in Claude Code" },
+  { host: "cursor", skills: "~/.cursor/skills", also: "—" },
+  { host: "codex", skills: "~/.codex/skills", also: "—" },
+  { host: "agents", skills: "~/.agents/skills", also: "— (fallback when nothing else matches)" },
+  { host: "windsurf", skills: "~/.codeium/windsurf/skills", also: "—" },
+  { host: "gemini", skills: "~/.gemini/skills", also: "—" },
+];
+---
+
+<Base title="Install">
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        label="Install"
+        title="One line, then you're routing."
+        lede={`Node 18 or later. ${ROUTER_COUNT} routers, ${TOTAL_DEPS} dependency entries, ${UNIQUE_SKILLS} unique skills — ${BUNDLED} bundled inside the repo for offline install, ${FETCHED} fetched from public sources at install time. Works across ${HOSTS} agent hosts.`}
+      />
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p class="label">Full install</p>
+      <pre class="steps"><code>git clone {SITE.repo}
+cd atelier
+node install.mjs              # everything
+node install.mjs web-design   # one router
+node install.mjs --check      # report only, change nothing
+node install.mjs --list       # what's available</code></pre>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .steps {
+    margin-block-start: 0.9rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--paper-raised);
+    border: var(--rule);
+    border-left: 3px solid var(--atelier-mark);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: clamp(0.78rem, 2.4vw, 0.9rem);
+    line-height: 1.75;
+    color: var(--atelier-ink);
+    box-shadow: 0 1px 4px rgba(20,18,15,0.04);
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+import { ROUTERS } from "../data/routers";
+import RouterCard from "./RouterCard.astro";
+---
+
+<div class="routergrid" data-reveal-stagger>
+  {
+    ROUTERS.map((router, i) => (
+      <RouterCard router={router} index={i} />
+    ))
+  }
+</div>
+
+<style>
+  .routergrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  @media (max-width: 720px) {
+    .routergrid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

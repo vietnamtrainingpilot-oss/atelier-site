@@ -1,0 +1,73 @@
+ INFO  Accepting connections at http://localhost:50335
+ HTTP  10/12/2026 9:00:49 PM ::1 GET /
+ HTTP  10/12/2026 9:00:49 PM ::1 Returned 200 in 22 ms
+ HTTP  10/12/2026 9:00:49 PM ::1 GET /atelier-site/_astro/about.DuxjvO9N.css
+ HTTP  10/12/2026 9:00:49 PM ::1 GET /atelier-site/_astro/index.Yf2AI9Ex.css
+ HTTP  10/12/2026 9:00:49 PM ::1 GET /atelier-site/_astro/Base.astro_astro_type_script_index_0_lang.CRKgG1bu.js
+ HTTP  10/12/2026 9:00:49 PM ::1 Returned 404 in 6 ms
+ HTTP  10/12/2026 9:00:49 PM ::1 Returned 404 in 5 ms
+ HTTP  10/12/2026 9:00:49 PM ::1 Returned 404 in 4 ms
+ HTTP  10/12/2026 9:00:49 PM ::1 GET /atelier-site/favicon.svg
+ HTTP  10/12/2026 9:00:49 PM ::1 Returned 404 in 3 ms
+ HTTP  10/12/2026 9:00:50 PM ::1 GET /atelier-site/_astro/Base.astro_astro_type_script_index_0_lang.CRKgG1bu.js
+ HTTP  10/12/2026 9:00:50 PM ::1 GET /atelier-site/_astro/about.DuxjvO9N.css
+ HTTP  10/12/2026 9:00:50 PM ::1 GET /atelier-site/_astro/index.Yf2AI9Ex.css
+ HTTP  10/12/2026 9:00:50 PM ::1 Returned 404 in 1 ms
+ HTTP  10/12/2026 9:00:50 PM ::1 Returned 404 in 2 ms
+ HTTP  10/12/2026 9:00:50 PM ::1 Returned 404 in 1 ms
+ HTTP  10/12/2026 9:00:58 PM ::1 GET /index.html
+ HTTP  10/12/2026 9:00:58 PM ::1 Returned 301 in 1 ms
+ HTTP  10/12/2026 9:00:58 PM ::1 GET /routers/index.html
+ HTTP  10/12/2026 9:00:58 PM ::1 Returned 301 in 1 ms
+ HTTP  10/12/2026 9:00:58 PM ::1 GET /install/index.html
+ HTTP  10/12/2026 9:00:58 PM ::1 Returned 301 in 0 ms
+ HTTP  10/12/2026 9:00:58 PM ::1 GET /about/index.html
+ HTTP  10/12/2026 9:00:58 PM ::1 Returned 301 in 0 ms
+ HTTP  10/12/2026 9:00:58 PM ::1 GET /404.html
+ HTTP  10/12/2026 9:00:58 PM ::1 Returned 301 in 0 ms
+ HTTP  10/12/2026 9:02:31 PM ::1 GET /index.html
+ HTTP  10/12/2026 9:02:31 PM ::1 Returned 301 in 0 ms
+ HTTP  10/12/2026 9:02:31 PM ::1 GET /index
+ HTTP  10/12/2026 9:02:31 PM ::1 Returned 301 in 1 ms
+ HTTP  10/12/2026 9:02:31 PM ::1 GET /
+ HTTP  10/12/2026 9:02:31 PM ::1 Returned 200 in 0 ms
+ HTTP  10/12/2026 9:02:31 PM ::1 GET /routers/
+ HTTP  10/12/2026 9:02:31 PM ::1 Returned 200 in 1 ms
+ HTTP  10/12/2026 9:02:31 PM ::1 GET /install/
+ HTTP  10/12/2026 9:02:31 PM ::1 Returned 200 in 1 ms
+ HTTP  10/12/2026 9:02:31 PM ::1 GET /about/
+ HTTP  10/12/2026 9:02:31 PM ::1 Returned 200 in 1 ms
+ HTTP  10/12/2026 9:02:31 PM ::1 GET /404.html
+ HTTP  10/12/2026 9:02:31 PM ::1 Returned 301 in 0 ms
+ HTTP  10/12/2026 9:02:31 PM ::1 GET /404
+ HTTP  10/12/2026 9:02:31 PM ::1 Returned 200 in 1 ms
+ HTTP  10/12/2026 9:04:30 PM ::1 GET /
+ HTTP  10/12/2026 9:04:30 PM ::1 Returned 200 in 1 ms
+ HTTP  10/12/2026 9:05:06 PM ::1 GET /index.html
+ HTTP  10/12/2026 9:05:06 PM ::1 Returned 301 in 1 ms
+ HTTP  10/12/2026 9:05:06 PM ::1 GET /routers/index.html
+ HTTP  10/12/2026 9:05:06 PM ::1 Returned 301 in 0 ms
+ HTTP  10/12/2026 9:05:06 PM ::1 GET /index.html
+ HTTP  10/12/2026 9:05:06 PM ::1 Returned 301 in 0 ms
+ HTTP  10/12/2026 9:05:06 PM ::1 GET /install/index.html
+ HTTP  10/12/2026 9:05:06 PM ::1 Returned 301 in 1 ms
+ HTTP  10/12/2026 9:05:06 PM ::1 GET /about/index.html
+ HTTP  10/12/2026 9:05:06 PM ::1 Returned 301 in 1 ms
+ HTTP  10/12/2026 9:05:11 PM ::1 GET /
+ HTTP  10/12/2026 9:05:11 PM ::1 Returned 304 in 1 ms
+ HTTP  10/12/2026 9:05:11 PM ::1 GET /atelier-site/_astro/about.DuxjvO9N.css
+ HTTP  10/12/2026 9:05:11 PM ::1 GET /atelier-site/_astro/index.Yf2AI9Ex.css
+ HTTP  10/12/2026 9:05:11 PM ::1 GET /atelier-site/_astro/Base.astro_astro_type_script_index_0_lang.CRKgG1bu.js
+ HTTP  10/12/2026 9:05:11 PM ::1 Returned 404 in 2 ms
+ HTTP  10/12/2026 9:05:11 PM ::1 Returned 404 in 3 ms
+ HTTP  10/12/2026 9:05:11 PM ::1 Returned 404 in 2 ms
+ HTTP  10/12/2026 9:05:11 PM ::1 GET /atelier-site/favicon.svg
+ HTTP  10/12/2026 9:05:11 PM ::1 Returned 404 in 1 ms
+ HTTP  10/12/2026 9:05:12 PM ::1 GET /atelier-site/_astro/Base.astro_astro_type_script_index_0_lang.CRKgG1bu.js
+ HTTP  10/12/2026 9:05:12 PM ::1 Returned 404 in 2 ms
+ HTTP  10/12/2026 9:05:12 PM ::1 GET /atelier-site/_astro/about.DuxjvO9N.css
+ HTTP  10/12/2026 9:05:12 PM ::1 Returned 404 in 4 ms
+ HTTP  10/12/2026 9:05:12 PM ::1 GET /atelier-site/_astro/index.Yf2AI9Ex.css
+ HTTP  10/12/2026 9:05:12 PM ::1 Returned 404 in 1 ms
+
+D:\Vietjet>

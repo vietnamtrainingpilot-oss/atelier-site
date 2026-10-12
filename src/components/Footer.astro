@@ -1,0 +1,76 @@
+---
+import { NAV, SITE, url } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="footer grain">
+  <div class="container">
+    <hr class="hairline" />
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a class="footer__wordmark mono" href={url("/")}>{SITE.wordmark}</a>
+        <p class="footer__tagline">{SITE.tagline}</p>
+      </div>
+
+      <nav class="footer__links" aria-label="Footer">
+        {NAV.map((item) => <a href={url(item.href)}>{item.label}</a>)}
+        <a href={SITE.repo} rel="noopener">GitHub</a>
+      </nav>
+    </div>
+
+    <div class="footer__meta">
+      <span class="label">{SITE.license} · v{SITE.version}</span>
+      <span class="label">© {year} {SITE.name}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-block-start: clamp(3rem, 8vw, 7rem);
+    padding-block-end: 3rem;
+  }
+
+  .footer__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: 2.5rem;
+  }
+
+  .footer__wordmark {
+    font-size: 1.05rem;
+  }
+
+  .footer__tagline {
+    margin-block-start: 0.6rem;
+    max-width: 34ch;
+    color: var(--atelier-muted);
+    font-size: var(--step--1);
+  }
+
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    align-content: flex-start;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--atelier-muted);
+  }
+
+  .footer__links a:hover {
+    color: var(--atelier-mark);
+  }
+
+  .footer__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block-start: 1.5rem;
+    border-top: var(--rule);
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  lede?: string;
+  id?: string;
+}
+
+const { label, title, lede, id } = Astro.props;
+---
+
+<div class="heading" id={id} data-reveal>
+  {label && <p class="label heading__label">{label}</p>}
+  <h2 class="heading__title">{title}</h2>
+  {lede && <p class="lede heading__lede">{lede}</p>}
+</div>
+
+<style>
+  .heading {
+    max-width: 52rem;
+  }
+
+  .heading__label {
+    margin-block-end: 0.9rem;
+  }
+
+  .heading__title {
+    font-size: var(--step-3);
+    line-height: 1.05;
+  }
+
+  .heading__lede {
+    margin-block-start: 1.1rem;
+    color: var(--ink-soft);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .heading[data-reveal] {
+      animation: heading-in 0.9s var(--ease-out) both;
+    }
+  }
+
+  @keyframes heading-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

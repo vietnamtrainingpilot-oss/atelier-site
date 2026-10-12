@@ -1,0 +1,101 @@
+---
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
+import "../styles/tokens.css";
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { SITE, url } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogType?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = SITE.description,
+  ogType = "website",
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} — ${SITE.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(url("/og.svg"), Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <meta name="theme-color" content="#f5f2ec" />
+    <meta name="color-scheme" content="light" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" type="image/svg+xml" href={url("/favicon.svg")} />
+
+    <script is:inline>
+      document.documentElement.classList.add("js");
+      window.setTimeout(function () {
+        if (!window.__atelierMotionReady) {
+          document.documentElement.classList.remove("js");
+        }
+      }, 2500);
+    </script>
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import "../scripts/motion.ts";
+    </script>
+
+    <style>
+      .skip {
+        position: absolute;
+        left: 1rem;
+        top: -3rem;
+        z-index: 60;
+        padding: 0.5rem 0.9rem;
+        background: var(--atelier-ink);
+        color: var(--atelier-paper);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border-radius: var(--radius);
+        transition: top 0.2s var(--ease-out);
+      }
+
+      .skip:focus {
+        top: 1rem;
+        color: var(--atelier-paper);
+      }
+    </style>
+  </body>
+</html>

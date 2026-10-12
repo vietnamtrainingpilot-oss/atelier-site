@@ -1,0 +1,193 @@
+---
+const routes = [
+  {
+    verb: "Make this landing page feel premium",
+    router: "web-design",
+    skills: ["design-taste-frontend", "awwwards-animations", "scroll-craft"],
+  },
+  {
+    verb: "Turn this repo into a launch video",
+    router: "video-production",
+    skills: ["hyperframes", "media-use", "embedded-captions"],
+  },
+  {
+    verb: "Why aren't we ranking?",
+    router: "seo",
+    skills: ["seo-audit", "keyword-research", "ai-visibility-audit"],
+  },
+  {
+    verb: "Take this from idea to shipped",
+    router: "ship-it",
+    skills: ["writing-plans", "verification-before-completion", "security"],
+  },
+];
+---
+
+<section class="diagram section" aria-labelledby="diagram-title">
+  <div class="container">
+    <p class="label" data-reveal>The routing</p>
+    <h2 id="diagram-title" class="diagram__title" data-reveal>
+      One verb in. One specialist out.
+    </h2>
+    <p class="lede diagram__lede" data-reveal>
+      A router reads the intent, picks the domain, and dispatches the exact skill
+      that owns the work — then hands off when another domain takes over.
+    </p>
+
+    <div class="diagram__stage" data-diagram>
+      <div class="diagram__rail" aria-hidden="true">
+        <span class="diagram__rail-fill" data-rail-fill></span>
+      </div>
+
+      <ol class="diagram__routes">
+        {
+          routes.map((r, i) => (
+            <li class="diagram__route" data-route={i}>
+              <span class="diagram__col diagram__col--verb">
+                <span class="label">Intent</span>
+                <span class="diagram__verb">“{r.verb}”</span>
+              </span>
+              <span class="diagram__arrow mono" aria-hidden="true">→</span>
+              <span class="diagram__col diagram__col--router">
+                <span class="label">Router</span>
+                <span class="diagram__router mono">{r.router}</span>
+              </span>
+              <span class="diagram__arrow mono" aria-hidden="true">→</span>
+              <span class="diagram__col diagram__col--skills">
+                <span class="label">Dispatched skills</span>
+                <span class="diagram__skills">
+                  {r.skills.map((s) => (
+                    <span class="diagram__skill mono">{s}</span>
+                  ))}
+                </span>
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .diagram__title {
+    font-size: var(--step-4);
+    line-height: 1.02;
+    margin-block: 0.5rem 0.75rem;
+    max-width: 18ch;
+  }
+
+  .diagram__lede {
+    max-width: 52ch;
+    color: var(--ink-soft);
+    margin-block-end: clamp(2rem, 6vw, 4rem);
+    line-height: 1.45;
+  }
+
+  .diagram__stage {
+    position: relative;
+    padding-inline-start: clamp(1rem, 4vw, 2.5rem);
+    background: var(--paper-raised);
+    border: var(--rule);
+    border-radius: var(--radius);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .diagram__rail {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 1px;
+    background: var(--atelier-rule);
+  }
+
+  .diagram__rail-fill {
+    position: absolute;
+    inset: 0;
+    transform-origin: top center;
+    transform: scaleY(0);
+    background: var(--atelier-mark);
+  }
+
+  .diagram__routes {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.75rem, 5vw, 3rem);
+  }
+
+  .diagram__route {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) auto minmax(0, 1fr) auto minmax(0, 1.4fr);
+    align-items: start;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    transition: opacity 0.5s var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .diagram__route {
+      opacity: 0.28;
+    }
+
+    :global(.js) .diagram__route[data-route-active] {
+      opacity: 1;
+    }
+  }
+
+  .diagram__col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .diagram__verb {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.2;
+    color: var(--atelier-ink);
+  }
+
+  .diagram__router {
+    font-size: var(--step-0);
+    color: var(--atelier-mark);
+    padding: 0.3em 0.65em;
+    border: 1px solid var(--mark-wash);
+    background: var(--mark-wash);
+    border-radius: var(--radius);
+    justify-self: start;
+  }
+
+  .diagram__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+  }
+
+  .diagram__skill {
+    font-size: 0.72rem;
+    color: var(--atelier-muted);
+    background: var(--paper-deep);
+    padding: 0.15em 0.45em;
+    border-radius: var(--radius);
+  }
+
+  .diagram__arrow {
+    color: var(--atelier-rule);
+    align-self: center;
+    padding-block-start: 1.1rem;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 760px) {
+    .diagram__route {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .diagram__arrow {
+      padding-block: 0;
+      transform: rotate(90deg);
+      justify-self: start;
+    }
+  }
+</style>
