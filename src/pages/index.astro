@@ -90,17 +90,13 @@ import { url } from "../data/site";
         <span class="rule-inline"></span>
         <span class="label label--mark">intent → dispatch</span>
       </div>
-      <h2 class="section-title section-title--light" data-reveal>
-        Intent in,<br class="section-br" />specialist out.
+      <h2 class="section-title" data-reveal>
+        One verb in.<br />One specialist out.
       </h2>
-      <ul class="steps-list" data-reveal-stagger>
-        {["You describe the work in plain language.", "Atelier classifies the intent against its eight domain routers.", "The router dispatches to its specialist skill with context intact.", "The result comes back through the same chain."].map((step, i) => (
-          <li class="steps-item">
-            <span class="steps-num mono">{String(i + 1).padStart(2, "0")}</span>
-            <p>{step}</p>
-          </li>
-        ))}
-      </ul>
+      <p class="section-lede" data-reveal>
+        A router reads the intent, picks the domain, and dispatches the exact skill
+        that owns the work — then hands off when another domain takes over.
+      </p>
     </div>
   </section>
 
