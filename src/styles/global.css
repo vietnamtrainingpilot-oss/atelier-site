@@ -44,18 +44,44 @@
   padding-block: clamp(4rem, 9vw, 7rem);
 }
 
-/* ---------- Typographic scale ---------- */
+/* ---------- Accent-intensive ---------- */
 
-:root {
-  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
-  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", monospace;
+/* Prominent mark accent on dark sections */
+.section--dark .heading__title,
+.section--dark .feature-num,
+.section--dark .feature-label,
+.section--dark .feature-card h3 {
+  color: var(--atelier-mark) !important;
+}
+
+.section--dark .feature-card {
+  border-top-color: var(--atelier-mark);
+}
+
+.section--dark .feature-card:hover {
+  background: rgba(180,85,45,0.08);
+}
+
+/* Mark accent on light sections */
+.section--light .heading__title,
+.section--light .feature-num,
+.section--light .feature-label,
+.section--light .feature-card h3 {
+  color: var(--atelier-mark);
+}
+
+.section--light .feature-card {
+  border-top-color: var(--atelier-mark);
+}
+
+.section--light .feature-card:hover {
+  background: rgba(180,85,45,0.05);
 }
 
 /* ---------- Base typography ---------- */
 
 body {
-  font-family: var(--font-body);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   font-size: var(--step-0);
   line-height: 1.6;
   color: var(--atelier-ink);
@@ -70,7 +96,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-display);
+  font-family: "Fraunces Variable", Georgia, "Times New Roman", serif;
   font-weight: 500;
   line-height: 1.06;
   letter-spacing: -0.015em;
