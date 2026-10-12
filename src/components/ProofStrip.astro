@@ -28,6 +28,12 @@ const stats = [
 </section>
 
 <style>
+  .proof {
+    background: var(--paper-raised);
+    border-top: var(--rule);
+    border-bottom: var(--rule);
+  }
+
   .proof__grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -40,11 +46,13 @@ const stats = [
   }
 
   .proof__cell {
-    background: var(--paper-raised);
+    background: var(--atelier-paper);
     padding: 0.5rem clamp(0.75rem, 2vw, 1.5rem);
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
+    text-align: center;
+    align-items: center;
   }
 
   .proof__num {

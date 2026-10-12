@@ -12,7 +12,7 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header class="nav" data-nav>
+<header class="nav" data-nav data-hero>
   <div class="container nav__inner">
     <a class="nav__brand mono" href={url("/")} aria-label={`${SITE.name} home`}>
       {SITE.wordmark}
@@ -53,6 +53,39 @@ function isActive(href: string): boolean {
   .nav.is-scrolled {
     border-bottom-color: var(--atelier-rule);
     background: color-mix(in srgb, var(--atelier-paper) 92%, transparent);
+  }
+
+  /* Dark hero nav override */
+  .nav[data-hero] {
+    background: transparent;
+    border-bottom-color: transparent;
+  }
+
+  .nav[data-hero].is-scrolled {
+    background: color-mix(in srgb, var(--atelier-ink) 90%, transparent);
+    border-bottom-color: rgba(245, 242, 236, 0.08);
+  }
+
+  .nav[data-hero] .nav__brand {
+    color: var(--atelier-paper);
+  }
+
+  .nav[data-hero] .nav__brand:hover {
+    color: var(--atelier-mark);
+  }
+
+  .nav[data-hero] .nav__link {
+    color: rgba(245, 242, 236, 0.5);
+  }
+
+  .nav[data-hero] .nav__link:hover,
+  .nav[data-hero] .nav__link[aria-current="page"] {
+    color: var(--atelier-paper);
+    border-bottom-color: var(--atelier-mark);
+  }
+
+  .nav[data-hero] .nav__link--ext::after {
+    color: rgba(245, 242, 236, 0.4);
   }
 
   .nav__inner {

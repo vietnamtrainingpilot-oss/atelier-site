@@ -51,7 +51,8 @@ const num = String(index + 1).padStart(2, "0");
     border: var(--rule);
     border-radius: var(--radius);
     border-top: 2px solid var(--atelier-rule);
-    transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+    transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out),
+      background-color 0.35s var(--ease-out), border-top-color 0.35s var(--ease-out);
     box-shadow: 0 1px 3px rgba(20,18,15,0.04);
   }
 
@@ -155,5 +156,51 @@ const num = String(index + 1).padStart(2, "0");
   .routercard__handoff {
     font-size: 0.66rem;
     color: var(--atelier-muted);
+  }
+
+  /* Dark theme override (when parent has data-theme="dark") */
+  [data-theme="dark"] .routercard {
+    background: rgba(245, 242, 236, 0.03);
+    border-color: rgba(245, 242, 236, 0.08);
+    border-top-color: rgba(245, 242, 236, 0.15);
+    box-shadow: none;
+  }
+
+  [data-theme="dark"] .routercard:hover {
+    background: rgba(245, 242, 236, 0.05);
+    border-top-color: var(--atelier-mark);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  [data-theme="dark"] .routercard__head {
+    border-block-end-color: rgba(245, 242, 236, 0.08);
+  }
+
+  [data-theme="dark"] .routercard__num {
+    color: var(--atelier-mark);
+  }
+
+  [data-theme="dark"] .routercard__title {
+    color: var(--atelier-paper);
+  }
+
+  [data-theme="dark"] .routercard__summary {
+    color: rgba(245, 242, 236, 0.5);
+  }
+
+  [data-theme="dark"] .routercard__skills {
+    color: rgba(245, 242, 236, 0.35);
+  }
+
+  [data-theme="dark"] .routercard__skills li::after {
+    color: rgba(245, 242, 236, 0.15);
+  }
+
+  [data-theme="dark"] .routercard__foot {
+    border-block-start-color: rgba(245, 242, 236, 0.08);
+  }
+
+  [data-theme="dark"] .routercard__handoff {
+    color: rgba(245, 242, 236, 0.35);
   }
 </style>
