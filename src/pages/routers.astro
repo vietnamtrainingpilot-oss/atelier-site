@@ -97,8 +97,21 @@ import { url } from "../data/site";
 
 <style>
   .router-detail {
-    padding-block: clamp(2.5rem, 7vw, 5.5rem);
-    border-top: var(--rule);
+    position: relative;
+    margin-block: clamp(2rem, 6vw, 4rem);
+    padding: clamp(2rem, 5vw, 3.5rem);
+    background: var(--paper-raised);
+    border: var(--rule);
+    border-radius: var(--radius);
+    border-top: 2px solid var(--atelier-rule);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  }
+
+  .router-detail:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(180,85,45,0.15);
+    border-top-color: var(--atelier-mark);
   }
 
   .router-detail:first-of-type {
@@ -110,10 +123,15 @@ import { url } from "../data/site";
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0.75rem 1.25rem;
+    padding-block-end: 0.75rem;
+    border-block-end: var(--rule);
   }
 
   .router-detail__title {
     font-size: var(--step-2);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--atelier-ink);
     flex: 1 1 auto;
     min-width: 10ch;
   }
@@ -121,11 +139,23 @@ import { url } from "../data/site";
   .router-detail__num,
   .router-detail__count {
     flex: none;
+    font-size: 0.7rem;
+    color: var(--atelier-muted);
+  }
+
+  .router-detail__count {
+    color: var(--atelier-mark);
+    background: var(--mark-wash);
+    padding: 0.1em 0.4em;
+    border-radius: var(--radius);
   }
 
   .router-detail__summary {
     margin-block-start: 1rem;
-    max-width: var(--measure);
+    color: var(--ink-soft);
+    font-size: var(--step--1);
+    line-height: 1.55;
+    max-width: 48ch;
   }
 
   .router-detail__chips {
@@ -138,21 +168,27 @@ import { url } from "../data/site";
 
   .router-detail__chip-label {
     margin-inline-end: 0.5rem;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--atelier-muted);
   }
 
   .chip {
     display: inline-block;
-    padding: 0.22em 0.6em;
+    padding: 0.2em 0.55em;
     background: var(--mark-wash);
     color: var(--mark-deep);
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     border-radius: var(--radius);
+    font-family: var(--font-mono);
   }
 
   .router-detail__handoff {
-    margin-block-start: 1rem;
+    margin-block-start: 1.5rem;
     color: var(--ink-soft);
     font-size: var(--step--1);
+    line-height: 1.5;
   }
 
   .router-detail__handoff a {

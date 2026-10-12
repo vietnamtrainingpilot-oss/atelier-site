@@ -26,7 +26,7 @@ import { url } from "../data/site";
       <p class="section-lede" data-reveal>
         Atelier is an opencode and Claude plugin. You describe the work you need done,
         and it routes the request to the specialist skill that does it best — across
-        eight domains, with dependencies bundled for offline use.
+        eight domains, with the dependencies bundled so the first run works offline.
       </p>
     </div>
 
@@ -77,13 +77,9 @@ import { url } from "../data/site";
     </div>
   </section>
 
-  <section class="section section--dark">
-    <div class="container">
-      <RoutingDiagram />
-    </div>
-  </section>
+  <RoutingDiagram />
 
-  <section class="section section--light">
+  <section class="section section--dark">
     <div class="container">
       <div class="eyebrow-row" data-reveal>
         <span class="label">how it routes</span>
@@ -97,6 +93,35 @@ import { url } from "../data/site";
         A router reads the intent, picks the domain, and dispatches the exact skill
         that owns the work — then hands off when another domain takes over.
       </p>
+      <div class="routing-diagram" data-reveal>
+        <div class="diagram__stage">
+          <div class="diagram__verb">“Make this landing page feel premium”</div>
+          <div class="diagram__router">web-design</div>
+          <div class="diagram__skills">
+            <span class="diagram__skill">design-taste-frontend</span>
+            <span class="diagram__skill">awwwards-animations</span>
+            <span class="diagram__skill">scroll-craft</span>
+          </div>
+        </div>
+        <div class="diagram__stage">
+          <div class="diagram__verb">“Turn this repo into a launch video”</div>
+          <div class="diagram__router">video-production</div>
+          <div class="diagram__skills">
+            <span class="diagram__skill">hyperframes</span>
+            <span class="diagram__skill">media-use</span>
+            <span class="diagram__skill">embedded-captions</span>
+          </div>
+        </div>
+        <div class="diagram__stage">
+          <div class="diagram__verb">“Why aren’t we ranking?”</div>
+          <div class="diagram__router">seo</div>
+          <div class="diagram__skills">
+            <span class="diagram__skill">seo-audit</span>
+            <span class="diagram__skill">keyword-research</span>
+            <span class="diagram__skill">ai-visibility-audit</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -128,13 +153,13 @@ import { url } from "../data/site";
   .section--dark {
     background: var(--atelier-ink);
     color: var(--atelier-paper);
-    padding-block: clamp(5rem, 12vw, 10rem);
+    padding-block: clamp(4rem, 9vw, 7rem);
   }
 
   .section--light {
     background: var(--atelier-paper);
     color: var(--atelier-ink);
-    padding-block: clamp(5rem, 12vw, 10rem);
+    padding-block: clamp(4rem, 9vw, 7rem);
   }
 
   .eyebrow-row {
@@ -247,6 +272,45 @@ import { url } from "../data/site";
     }
   }
 
+  .routing-diagram .diagram__stage {
+    background: var(--paper-deep);
+    border: var(--rule);
+    border-radius: var(--radius);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .routing-diagram .diagram__verb {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.2;
+    color: var(--atelier-ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .routing-diagram .diagram__router {
+    font-size: var(--step-0);
+    color: var(--atelier-mark);
+    padding: 0.3em 0.65em;
+    border: 1px solid var(--mark-wash);
+    background: var(--mark-wash);
+    border-radius: var(--radius);
+    justify-self: start;
+  }
+
+  .routing-diagram .diagram__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+  }
+
+  .routing-diagram .diagram__skill {
+    font-size: 0.72rem;
+    color: var(--atelier-muted);
+    background: var(--paper-deep);
+    padding: 0.15em 0.45em;
+    border-radius: var(--radius);
+  }
+
   .steps-list {
     list-style: none;
     margin: 0;
@@ -262,7 +326,7 @@ import { url } from "../data/site";
   }
 
   .steps-item {
-    background: var(--atelier-paper);
+    background: var(--paper-raised);
     padding: clamp(1.5rem, 3vw, 2.25rem);
     display: flex;
     flex-direction: column;
