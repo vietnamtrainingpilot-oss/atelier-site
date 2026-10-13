@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F2EC'/%3E%3Cpath d='M8 14 16 8l8 6v10h-6v-6h-4v6H8z' fill='%23B4552D'/%3E%3C/svg%3E">
 <title>Atelier — domain routers for agent skills</title>
 <meta name="description" content="Invoke one router instead of choosing among a hundred skills. Eight routers, 105 skills, seven agent hosts.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F2EC'/%3E%3Cpath d='M8 14 16 8l8 6v10h-6v-6h-4v6H8z' fill='%23B4552D'/%3E%3C/svg%3E">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 :root{
@@ -21,122 +21,174 @@
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
 }
 html{-webkit-text-size-adjust:100%;background:var(--paper)}
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--serif);
-  font-size:18px;
-  line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-}
-main,.section,.site-head,.site-foot,.marquee{background:var(--paper)}
-h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;margin:0}
-h1{font-size:clamp(34px,6.2vw,62px);line-height:1.06}
-h2{font-size:clamp(26px,3.6vw,38px);line-height:1.14}
-h3{font-size:clamp(19px,2vw,22px);line-height:1.26}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
+main,.site-head,.site-foot,.marquee,.section{background:var(--paper)}
+
+/* type scale — fixed steps, one fluid size */
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0}
+h1{font-size:clamp(40px,6.4vw,68px);line-height:1.04;letter-spacing:-.022em}
+h2{font-size:26px;line-height:1.18;letter-spacing:-.012em}
+h2.lead{font-size:30px}
+h3{font-size:20px;line-height:1.28}
 p{margin:0}
 a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
 a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:.12em .34em}
+
 .wrap{max-width:1080px;margin-inline:auto;padding-inline:clamp(20px,5vw,40px)}
-.prose{max-width:66ch;margin-inline:auto}
+.prose{max-width:66ch}
 .center{text-align:center}
-.eyebrow{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
-.lede{font-size:clamp(17px,1.55vw,20px);color:var(--ink-2)}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:19px;color:var(--ink-2)}
 .muted{color:var(--muted)}
-.section{padding:clamp(64px,9vw,124px) 0;border-top:1px solid var(--rule)}
-.section-head{text-align:center;margin-bottom:clamp(36px,5vw,60px)}
-.section-head p{margin-top:16px;color:var(--ink-2)}
+.mono{font-family:var(--mono)}
+
+/* four distinct vertical rhythms */
+.section{padding:88px 0;border-top:1px solid var(--rule)}
+.section.tight{padding:60px 0}
+.section.roomy{padding:132px 0}
+.section.airy{padding:172px 0}
+.section-head{margin-bottom:44px}
+.section-head p{margin-top:14px;color:var(--ink-2);max-width:52ch}
+.section-head.center p{margin-inline:auto}
+
 .skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--paper);border:1px solid var(--ink);border-radius:2px;padding:10px 16px;text-decoration:none}
 .skip:focus{left:12px;top:12px;color:var(--accent);border-color:var(--accent)}
-.site-head{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid transparent}
+
+/* nav */
+.site-head{position:sticky;top:0;z-index:50;border-bottom:1px solid transparent}
 .site-head.is-stuck{border-bottom-color:var(--rule)}
 .nav{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;padding:15px 0}
 .brand{display:inline-flex;align-items:center;text-decoration:none;font-size:17px;white-space:nowrap}
 .mark{display:inline-block;vertical-align:-.05em;width:.8em;height:.8em;margin-right:.34em;color:var(--accent);flex:0 0 auto}
-.nav-links{margin-left:auto;display:flex;align-items:baseline;gap:clamp(14px,2.4vw,26px);flex-wrap:wrap}
+.nav-links{margin-left:auto;display:flex;align-items:baseline;gap:26px;flex-wrap:wrap}
 .nav-links a{text-decoration:none;font-size:15px;color:var(--ink-2)}
-.nav-links a:hover{color:var(--accent)}
-.nav-links a[aria-current]{color:var(--accent)}
+.nav-links a:hover,.nav-links a[aria-current]{color:var(--accent)}
+
 .btn{display:inline-block;padding:12px 22px;border:1px solid var(--ink);border-radius:2px;background:transparent;color:var(--ink);font-family:var(--serif);font-size:16px;text-decoration:none;cursor:pointer;line-height:1.3}
 .btn:hover{border-color:var(--accent);color:var(--accent)}
 .btn-solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .btn-solid:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
-.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:clamp(48px,6vw,72px)}
-.stat{padding:26px 12px;text-align:center}
+.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* hero */
+.hero{padding:150px 0 40px;text-align:center}
+.hero .lede{max-width:44ch;margin:30px auto 0}
+.rule-mark{display:flex;align-items:center;justify-content:center;gap:0;margin:38px auto 0;max-width:210px}
+.rule-mark i{display:block;flex:1;border-top:1px solid var(--rule)}
+.rule-mark b{display:block;width:26px;border-top:2px solid var(--accent)}
+.hero .actions{margin-top:40px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:72px}
+.stat{padding:24px 12px;text-align:center}
 .stat + .stat{border-left:1px solid var(--rule)}
-.stat b{display:block;font-weight:400;font-size:clamp(26px,3.2vw,34px);line-height:1.1}
-.stat span{display:block;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:8px}
-.marquee{overflow:hidden;border-bottom:1px solid var(--rule);padding:13px 0}
+.stat b{display:block;font-weight:400;font-size:30px;line-height:1.1}
+.stat span{display:block;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:7px}
+
+.marquee{overflow:hidden;padding:13px 0}
 .mq-track{display:flex;width:max-content;animation:slide 44s linear infinite}
 .mq-group{display:flex;gap:56px;padding-right:56px}
 .mq-group span{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 @keyframes slide{to{transform:translateX(-50%)}}
-.console{border:1px solid var(--rule);border-radius:2px;background:var(--card);padding:clamp(26px,3.6vw,44px)}
-.exchange{display:flex;flex-direction:column;gap:clamp(30px,3.4vw,44px)}
-.msg{display:flex;flex-direction:column;gap:9px}
-.sender{font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+
+/* console */
+.console{border:1px solid var(--rule);border-radius:2px;background:var(--card);padding:40px 44px 48px}
+.exchange{display:flex;flex-direction:column;gap:38px}
+.msg{display:flex;flex-direction:column;gap:10px}
+.sender{font-size:12px;letter-spacing:.18em;text-transform:uppercase}
 .msg.you{align-items:flex-end}
 .msg.you .sender{color:var(--muted)}
-.msg.you .bubble{max-width:78%;padding:16px 20px;border:1px solid rgba(180,85,45,.14);border-radius:2px;background:rgba(180,85,45,.08);font-size:clamp(17px,1.8vw,20px);line-height:1.42}
+.msg.you .bubble{max-width:78%;padding:16px 20px;border:1px solid rgba(180,85,45,.14);border-radius:2px;background:rgba(180,85,45,.08);font-size:19px;line-height:1.42}
 .msg.agent{align-items:flex-start}
 .msg.agent .sender{color:var(--accent)}
-.msg.agent .bubble{max-width:88%;padding:20px 22px;border:1px solid var(--rule);border-radius:2px;background:var(--paper);color:var(--ink-2)}
-.result{margin-top:18px;padding:16px 18px;border-left:2px solid var(--accent);border-radius:0 2px 2px 0;background:rgba(180,85,45,.05)}
-.result dl{display:grid;grid-template-columns:104px 1fr;gap:11px 20px;margin:0}
-.result dt{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:.15em}
+.msg.agent .bubble{max-width:88%;padding:22px 24px;border:1px solid var(--rule);border-radius:2px;background:var(--paper);color:var(--ink-2);font-size:17px;line-height:1.58}
+.result{margin-top:22px;padding:18px 20px;border-left:2px solid var(--accent);border-radius:0 2px 2px 0;background:rgba(180,85,45,.05)}
+.result dl{display:grid;grid-template-columns:110px 1fr;gap:12px 22px;margin:0}
+.result dt{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding-top:.16em}
 .result dd{margin:0;color:var(--ink)}
 
-/* scenario routing diagram */
-.map{display:grid;grid-template-columns:minmax(0,250px) 1fr;align-items:start}
+/* scenario diagram */
+.map{display:grid;grid-template-columns:236px 1fr;align-items:start;margin-top:60px}
 .map-in{position:relative;padding:16px 18px;border:1px solid var(--ink);border-radius:2px;background:var(--paper)}
-.map-in p{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.map-in code{display:block;margin-top:10px;background:none;border:0;padding:0;font-size:14px;line-height:1.5;color:var(--ink)}
+.map-in p{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
+.map-in code{display:block;margin-top:10px;background:none;border:0;padding:0;font-size:13.5px;line-height:1.55;color:var(--ink)}
 .map-in::after{content:"";position:absolute;top:30px;right:-56px;width:56px;border-top:1px solid var(--rule)}
+.map-in.on{border-color:var(--accent)}
+.map-in.on::after{border-top-color:var(--accent)}
 .map-side{position:relative;padding-left:56px}
 .map-side::before{content:"";position:absolute;left:0;top:28px;bottom:30px;border-left:1px solid var(--rule)}
 .branch{position:relative;padding-bottom:20px}
 .branch:last-child{padding-bottom:0}
 .branch::before{content:"";position:absolute;left:-56px;top:28px;width:56px;border-top:1px solid var(--rule)}
 .node{padding:15px 18px;border:1px solid var(--rule);border-radius:2px;background:var(--paper)}
-.node .node-title{font-size:17px;line-height:1.3}
-.node .node-router{margin-top:6px;font-size:15px;color:var(--ink-2)}
-.node .node-lead{margin-top:6px;font-size:13px}
+.node-title{font-size:18px;line-height:1.3}
+.node-router{margin-top:5px;font-size:15px;color:var(--ink-2)}
+.node-lead{margin-top:5px;font-size:13px}
 .branch.on .node{background:var(--tint);border-color:var(--accent)}
 .branch.on::before{border-top-color:var(--accent)}
-.map-in.on{border-color:var(--accent)}
-.map-in.on::after{border-top-color:var(--accent)}
+
+/* domains */
 .domains{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--rule);border-radius:2px;background:var(--card)}
-.card{display:block;text-decoration:none;background:var(--card);padding:30px 28px 32px;border-radius:2px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.card:nth-child(2n){border-right:0}
-.card:nth-child(n+7){border-bottom:0}
-.card:hover{background:var(--tint)}
-.card:hover .card-name{color:var(--accent)}
-.card-no{font-size:12px;letter-spacing:.16em;color:var(--muted)}
-.card-name{margin:14px 0 10px}
-.card-desc{color:var(--ink-2);font-size:16px}
-.card-dep{margin-top:20px;padding-top:14px;border-top:1px solid var(--rule);font-size:14px;color:var(--muted)}
+.card{display:block;text-decoration:none;background:var(--card);padding:26px 24px 28px;border-radius:2px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background .18s ease}
+.card:hover{background:rgba(180,85,45,.04)}
+.card-name{font-size:19px;line-height:1.28}
+.card-desc{margin-top:9px;color:var(--ink-2);font-size:16px;line-height:1.55}
+.card-dep{margin-top:18px;padding-top:12px;border-top:1px solid var(--rule);font-size:14px;color:var(--muted)}
 .card-dep b{font-weight:400;color:var(--ink)}
+.card.feature{grid-column:1 / -1;display:grid;grid-template-columns:1fr 190px;gap:30px;align-items:end;border-right:0;padding:32px 30px 30px}
+.card.feature .card-desc{max-width:56ch;margin-top:12px;font-size:17px}
+.card.feature .card-dep{margin-top:0;padding-top:0;border-top:0;border-left:1px solid var(--rule);padding-left:30px;font-size:15px}
+.card.feature .card-dep b{display:block;font-size:28px;line-height:1.1}
+.card.more{background:var(--paper);display:flex;flex-direction:column;justify-content:center}
+.card.more .card-name{font-size:17px;color:var(--ink-2)}
+.card:nth-child(odd):not(.feature){border-right:0}
+.card:nth-last-child(-n+2){border-bottom:0}
+
+/* tables */
 .table-scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:2px;background:var(--card)}
-table{border-collapse:collapse;width:100%;min-width:760px;font-size:15px}
-th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
-thead th{background:var(--paper);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400;white-space:nowrap}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:15.5px}
+th,td{text-align:left;padding:19px 22px;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{background:var(--paper);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:400;white-space:nowrap}
+tbody tr{transition:background .18s ease}
+tbody tr:hover{background:rgba(180,85,45,.04)}
 tbody tr:last-child td{border-bottom:0}
-td.num{color:var(--muted);font-size:13px;width:52px}
-td.dep{color:var(--muted);font-size:13px}
-.copy{display:inline-flex;align-items:center;gap:14px;padding:14px 20px;border:1px solid var(--ink);border-radius:2px;background:var(--card);font-family:var(--serif);cursor:pointer}
-.copy:hover{border-color:var(--accent)}
-.copy code{background:none;border:0;padding:0;font-size:15px;color:var(--ink)}
-.copy-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);min-width:52px;text-align:left}
-.copy.is-done .copy-label{color:var(--accent)}
-.site-foot{border-top:1px solid var(--rule);padding:44px 0}
+td.router{font-size:17px;width:210px}
+td.dep{text-align:right;font-family:var(--mono);font-size:13.5px;color:var(--muted);width:92px}
+td.hand{color:var(--ink-2);font-size:15px}
+
+/* install cards */
+.methods{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.method{padding:22px 24px 24px;border:1px solid var(--rule);border-radius:2px;background:var(--card)}
+.method.lead{border-left:2px solid var(--accent)}
+.method-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.method-head b{font-weight:400;font-size:17px}
+.method-head span{font-size:13px;color:var(--muted)}
+.method code{display:block;margin-top:14px;background:none;border:0;padding:0;font-size:13px;line-height:1.75;word-break:break-all;color:var(--ink)}
+.method .copy{margin-top:16px}
+
+.copy{display:inline-flex;align-items:center;gap:12px;padding:9px 16px;border:1px solid var(--rule);border-radius:2px;background:var(--paper);font-family:var(--serif);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);cursor:pointer}
+.copy:hover{border-color:var(--accent);color:var(--accent)}
+.copy.is-done{color:var(--accent);border-color:var(--accent)}
+.copy code,.copy .cmdfont{background:none;border:0;padding:0;font-family:var(--mono);font-size:13px;letter-spacing:0;text-transform:none;color:var(--ink)}
+
+.install-note{margin-top:26px;font-size:15px;color:var(--muted);text-align:center}
+.install-note .mono{color:var(--ink-2)}
+.install-note .accent{color:var(--accent)}
+
+/* restart note */
+.restart{margin:0 auto;max-width:640px;padding:26px 28px;text-align:center;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:17px;color:var(--ink-2)}
+
+/* footer */
+.site-foot{border-top:1px solid var(--rule);padding:46px 0}
 .foot-inner{display:flex;gap:18px 30px;flex-wrap:wrap;align-items:baseline;justify-content:center;text-align:center}
 .foot-inner a{display:inline-flex;align-items:center;text-decoration:none;font-size:15px;color:var(--ink-2)}
 .foot-inner a:hover{color:var(--accent)}
 .foot-note{width:100%;text-align:center;font-size:14px;color:var(--muted)}
+.credit{width:100%;text-align:center;font-size:13px;color:var(--muted);margin-top:10px}
+.credit a{font-size:13px;color:var(--muted)}
+.credit code{background:none;border:0;padding:0;font-size:12px;color:var(--muted)}
+
+/* reveal — progressive enhancement only */
 .js .reveal{opacity:0;transform:translateY(14px)}
 .js .reveal.is-in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
 @media (prefers-reduced-motion: reduce){
@@ -144,19 +196,34 @@ td.dep{color:var(--muted);font-size:13px}
   .js .reveal{opacity:1;transform:none}
   .mq-track{animation:none}
 }
-@media (max-width:640px){
+
+@media (max-width:760px){
   body{font-size:17px}
-  .stats{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:38px}
+  h2{font-size:22px}
+  h2.lead{font-size:24px}
+  h3{font-size:18px}
+  .lede{font-size:17px}
+  .section{padding:56px 0}
+  .section.tight{padding:40px 0}
+  .section.roomy{padding:80px 0}
+  .section.airy{padding:92px 0}
+  .hero{padding:96px 0 32px}
+  .nav{gap:10px 18px;padding:12px 0}
+  .nav-links{gap:16px}
+  .stats{grid-template-columns:repeat(2,1fr);margin-top:52px}
   .stat:nth-child(odd){border-left:0}
   .stat:nth-child(n+3){border-top:1px solid var(--rule)}
-  .domains{grid-template-columns:1fr}
-  .domains .card{border-right:0;border-bottom:1px solid var(--rule)}
-  .domains .card:last-child{border-bottom:0}
-  .nav{gap:10px 18px;padding:12px 0}
-  .result dl{grid-template-columns:1fr;gap:4px 0}
-  .result dt{padding-top:12px}
+  .stat b{font-size:26px}
+  .console{padding:26px 20px 32px}
+  .exchange{gap:30px}
+  .msg.you .bubble,.msg.agent .bubble{max-width:100%}
+  .msg.agent .bubble{padding:18px 16px}
+  .result{margin-top:16px;padding:15px 14px}
+  .result dl{grid-template-columns:1fr;gap:3px 0}
+  .result dt{padding-top:13px}
   .result dt:first-child{padding-top:0}
-  .map{grid-template-columns:1fr}
+  .map{grid-template-columns:1fr;margin-top:44px}
   .map-in::after{left:50%;top:auto;bottom:-30px;right:auto;width:0;height:30px;border-top:0;border-left:1px solid var(--rule)}
   .map-in.on::after{border-top:0;border-left-color:var(--accent)}
   .map-side{padding-left:0}
@@ -164,7 +231,14 @@ td.dep{color:var(--muted);font-size:13px}
   .branch{padding-top:30px;padding-bottom:0}
   .branch::before{left:50%;top:0;width:0;height:30px;border-top:0;border-left:1px solid var(--rule)}
   .branch.on::before{border-top:0;border-left-color:var(--accent)}
-  .node{width:100%}
+  .domains{grid-template-columns:1fr}
+  .domains .card{border-right:0;border-bottom:1px solid var(--rule)}
+  .domains .card:last-child{border-bottom:0}
+  .card.feature{grid-template-columns:1fr;gap:18px;border-bottom:1px solid var(--rule)}
+  .card.feature .card-dep{border-left:0;padding-left:0;border-top:1px solid var(--rule);padding-top:14px}
+  .card.feature .card-dep b{display:inline;font-size:20px}
+  .methods{grid-template-columns:1fr}
+  .restart{font-size:16px;padding:22px 20px}
 }
 </style>
 </head>
@@ -185,16 +259,15 @@ td.dep{color:var(--muted);font-size:13px}
 
 <main id="main">
 
-  <section class="section" style="border-top:0">
+  <section class="hero">
     <div class="wrap">
-      <div class="center">
-        <p class="eyebrow reveal"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Atelier</p>
-        <h1 class="reveal" style="margin-top:22px">Domain routers that dispatch agent skills to the right specialist.</h1>
-        <p class="lede reveal" style="margin-top:26px;max-width:60ch;margin-inline:auto">Invoke one router instead of choosing among a hundred skills. It picks the lead, adds at most two supports, and hands off when the work crosses a boundary.</p>
-        <div class="actions reveal">
-          <a class="btn btn-solid" href="install.html">node install.mjs</a>
-          <a class="btn" href="routers.html">Browse the routers →</a>
-        </div>
+      <p class="eyebrow reveal"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Atelier</p>
+      <h1 class="reveal" style="margin-top:24px">Domain routers that dispatch agent skills to the right specialist.</h1>
+      <div class="rule-mark reveal" aria-hidden="true"><i></i><b></b><i></i></div>
+      <p class="lede reveal">Invoke one router instead of choosing among a hundred skills. It names the lead, adds at most two supports, and hands off when the work crosses a boundary.</p>
+      <div class="actions reveal">
+        <a class="btn btn-solid" href="install.html">Two lines, then you're routing</a>
+        <a class="btn" href="routers.html">The eight routers</a>
       </div>
 
       <div class="stats reveal">
@@ -221,9 +294,9 @@ td.dep{color:var(--muted);font-size:13px}
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head center reveal">
         <h2>One verb in. One specialist out.</h2>
-        <p>You state the job. The router names the lead, adds at most two supports, and hands off when the work crosses a boundary.</p>
+        <p>You state the job. The router commits to a lead, caps the supports at two, and hands off rather than guessing.</p>
       </div>
 
       <div class="console reveal">
@@ -237,7 +310,7 @@ td.dep{color:var(--muted);font-size:13px}
           <div class="msg agent">
             <p class="sender">agent</p>
             <div class="bubble">
-              <p>This is a <code>web-design</code> job, so that router takes it. It picks a lead, adds two supports, and reserves the hero motion for <code>video-production</code>.</p>
+              <p><code>web-design</code> owns this domain, so it takes it. Lead handles the build, two supports cover motion, and the hero animation belongs to another router entirely.</p>
               <div class="result">
                 <dl>
                   <dt>Lead skill</dt>
@@ -245,7 +318,7 @@ td.dep{color:var(--muted);font-size:13px}
                   <dt>Supports</dt>
                   <dd><code>awwwards-animations</code> · <code>gsap-scrolltrigger</code></dd>
                   <dt>Handoff</dt>
-                  <dd><code>video-production</code> — for the hero motion, sharing this page's type and palette</dd>
+                  <dd><code>video-production</code> — hero motion, inheriting this page's type and palette</dd>
                 </dl>
               </div>
             </div>
@@ -254,7 +327,7 @@ td.dep{color:var(--muted);font-size:13px}
         </div>
       </div>
 
-      <div class="map reveal" style="margin-top:clamp(44px,5vw,68px)">
+      <div class="map reveal">
         <div class="map-in on">
           <p>user request</p>
           <code>"Build me a landing page for my SaaS"</code>
@@ -283,68 +356,75 @@ td.dep{color:var(--muted);font-size:13px}
           </div>
         </div>
       </div>
-
-      <p class="center muted reveal" style="margin-top:26px;font-size:16px">Every router entry, with worked examples: <a href="routers.html">the full reference</a>.</p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section roomy">
     <div class="wrap">
-      <div class="section-head reveal">
-        <h2>Eight domains, one interface.</h2>
-        <p>Routers are named for the job, never for the tool. Each one hides the implementation, so the underlying skills can change without renaming anything.</p>
+      <div class="section-head center reveal">
+        <h2 class="lead">Eight domains, one interface.</h2>
+        <p>Routers are named for the job, never for the tool — so the underlying skills can change without renaming anything.</p>
       </div>
 
       <div class="domains reveal">
-        <a class="card" href="routers.html#web-design">
-          <h3 class="card-name">web-design</h3>
-          <p class="card-desc">Landing pages, portfolios, redesigns, design systems, UI, and scroll or cinematic motion.</p>
+        <a class="card feature" href="routers.html#web-design">
+          <div>
+            <h3 class="card-name">web-design</h3>
+            <p class="card-desc">The largest domain: landing pages, portfolios, redesigns, design systems, UI, and scroll or cinematic motion. Forty-six skills, because design taste is not one decision — it is a dozen, and only one of them should lead any given page.</p>
+          </div>
           <p class="card-dep"><b>46</b> skills</p>
         </a>
+
         <a class="card" href="routers.html#video-production">
           <h3 class="card-name">video-production</h3>
-          <p class="card-desc">HTML-to-video rendering, React video, and social promo — chosen by input, not output.</p>
+          <p class="card-desc">HTML-to-video, React video, social promo. The workflow is picked from your input — a PR, a product URL, an audio file — not from the format you want out.</p>
           <p class="card-dep"><b>25</b> skills</p>
         </a>
         <a class="card" href="routers.html#seo">
           <h3 class="card-name">seo</h3>
-          <p class="card-desc">Keyword research, clustering, audits, competitor analysis, backlinks, AI visibility.</p>
+          <p class="card-desc">An ordered pipeline, not a menu.</p>
           <p class="card-dep"><b>12</b> skills</p>
         </a>
+
         <a class="card" href="routers.html#backend">
           <h3 class="card-name">backend</h3>
-          <p class="card-desc">APIs, data, auth, architecture, refactors, legacy codebases, debugging.</p>
+          <p class="card-desc">APIs, auth, architecture, refactors, and the archaeology of a codebase nobody has explained to you yet.</p>
           <p class="card-dep"><b>15</b> skills</p>
         </a>
         <a class="card" href="routers.html#payments">
           <h3 class="card-name">payments</h3>
-          <p class="card-desc">Stripe integration, checkout, subscriptions, webhooks, tax and VAT, PCI-safe flows.</p>
+          <p class="card-desc">Stripe, loaded from the official source rather than from model memory.</p>
           <p class="card-dep"><b>1</b> skill, 6 references</p>
         </a>
+
         <a class="card" href="routers.html#security">
           <h3 class="card-name">security</h3>
-          <p class="card-desc">Repository and diff scanning, auth and secrets review, verified patch generation.</p>
+          <p class="card-desc">Scan, verify, patch, redact. Six of the eight subagents are read-only, so a scan cannot damage the thing it is scanning.</p>
           <p class="card-dep"><b>1</b> skill, 8 subagents</p>
         </a>
         <a class="card" href="routers.html#vibe-code">
           <h3 class="card-name">vibe-code</h3>
-          <p class="card-desc">A fast path from a vague idea to something running. Deliberately skips heavyweight process.</p>
+          <p class="card-desc">A vague idea in, a running thing out. No ceremony.</p>
           <p class="card-dep"><b>4</b> skills</p>
         </a>
-        <a class="card" href="routers.html#ship-it">
+
+        <a class="card more" href="routers.html#ship-it">
           <h3 class="card-name">ship-it</h3>
-          <p class="card-desc">Process-to-result delivery: decide, plan, build, verify, secure, perform, ship.</p>
-          <p class="card-dep"><b>6</b> skills</p>
+          <p class="card-desc">The spine. Decides, plans, builds, verifies, secures, ships — and will not walk past verification on a good day.</p>
+          <p class="card-dep">6 skills</p>
+        </a>
+        <a class="card more" href="routers.html">
+          <p class="card-name">Read all eight, with worked examples →</p>
         </a>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section tight">
     <div class="wrap">
-      <div class="section-head reveal">
-        <h2>The routing manifest.</h2>
-        <p>Every declared dependency, and the decision each router makes before it writes a line.</p>
+      <div class="section-head center reveal">
+        <h2>What each router commits to.</h2>
+        <p>110 declared dependencies, 105 distinct skills. Some are shared, which is why the counts do not add up.</p>
       </div>
 
       <div class="table-scroll reveal">
@@ -352,77 +432,51 @@ td.dep{color:var(--muted);font-size:13px}
           <thead>
             <tr>
               <th scope="col">Router</th>
-              <th scope="col">Deps</th>
+              <th scope="col" style="text-align:right">Deps</th>
               <th scope="col">Lead skill</th>
               <th scope="col">Hands off to</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><a href="routers.html#web-design">web-design</a></td>
-              <td class="dep">46</td>
-              <td><code>ai-ui-ux-motion-engine</code></td>
-              <td class="muted">video-production</td>
-            </tr>
-            <tr>
-              <td><a href="routers.html#video-production">video-production</a></td>
-              <td class="dep">25</td>
-              <td><code>hyperframes</code></td>
-              <td class="muted">web-design</td>
-            </tr>
-            <tr>
-              <td><a href="routers.html#seo">seo</a></td>
-              <td class="dep">12</td>
-              <td><code>seo-audit</code></td>
-              <td class="muted">—</td>
-            </tr>
-            <tr>
-              <td><a href="routers.html#backend">backend</a></td>
-              <td class="dep">15</td>
-              <td><code>ponytail</code></td>
-              <td class="muted">payments · security · ship-it</td>
-            </tr>
-            <tr>
-              <td><a href="routers.html#payments">payments</a></td>
-              <td class="dep">1</td>
-              <td><code>stripe-best-practices</code></td>
-              <td class="muted">—</td>
-            </tr>
-            <tr>
-              <td><a href="routers.html#security">security</a></td>
-              <td class="dep">1</td>
-              <td><code>claude-security</code></td>
-              <td class="muted">—</td>
-            </tr>
-            <tr>
-              <td><a href="routers.html#vibe-code">vibe-code</a></td>
-              <td class="dep">4</td>
-              <td><code>brainstorming</code></td>
-              <td class="muted">payments · security</td>
-            </tr>
-            <tr>
-              <td><a href="routers.html#ship-it">ship-it</a></td>
-              <td class="dep">6</td>
-              <td><code>writing-plans</code></td>
-              <td class="muted">web-design · video-production · seo · payments · security · backend</td>
-            </tr>
+            <tr><td class="router"><a href="routers.html#web-design">web-design</a></td><td class="dep">46</td><td><code>ai-ui-ux-motion-engine</code></td><td class="hand">video-production</td></tr>
+            <tr><td class="router"><a href="routers.html#video-production">video-production</a></td><td class="dep">25</td><td><code>hyperframes</code></td><td class="hand">web-design</td></tr>
+            <tr><td class="router"><a href="routers.html#seo">seo</a></td><td class="dep">12</td><td><code>seo-audit</code></td><td class="hand">—</td></tr>
+            <tr><td class="router"><a href="routers.html#backend">backend</a></td><td class="dep">15</td><td><code>ponytail</code></td><td class="hand">payments · security · ship-it</td></tr>
+            <tr><td class="router"><a href="routers.html#payments">payments</a></td><td class="dep">1</td><td><code>stripe-best-practices</code></td><td class="hand">—</td></tr>
+            <tr><td class="router"><a href="routers.html#security">security</a></td><td class="dep">1</td><td><code>claude-security</code></td><td class="hand">—</td></tr>
+            <tr><td class="router"><a href="routers.html#vibe-code">vibe-code</a></td><td class="dep">4</td><td><code>brainstorming</code></td><td class="hand">payments · security</td></tr>
+            <tr><td class="router"><a href="routers.html#ship-it">ship-it</a></td><td class="dep">6</td><td><code>writing-plans</code></td><td class="hand">the other six</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="center muted reveal" style="margin-top:20px;font-size:15px">110 declared dependencies, 105 distinct skills — some are shared between routers.</p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap center">
-      <div class="reveal">
-        <h2>Run one line.</h2>
-        <p class="lede" style="max-width:52ch;margin:16px auto 0">Node 18+ and git. Then restart your agent, because skills only register at startup.</p>
-        <p style="margin-top:34px">
-          <button class="copy" type="button" data-copy="node install.mjs"><code>node install.mjs</code><span class="copy-label">Copy</span></button>
-        </p>
-        <p style="margin-top:26px"><a href="install.html">Flags, hosts, and troubleshooting →</a></p>
+  <section class="section airy">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <h2>Two ways in.</h2>
+        <p>One line clones the repo and runs the installer. It works on every supported host.</p>
       </div>
+
+      <div class="methods reveal">
+        <div class="method lead">
+          <div class="method-head"><b>bash</b><span>macOS · Linux · Git Bash</span></div>
+          <code>curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash</code>
+          <button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash">Copy</button>
+        </div>
+        <div class="method">
+          <div class="method-head"><b>powershell</b><span>PowerShell 5.1+</span></div>
+          <code>irm https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.ps1 | iex</code>
+          <button class="copy" type="button" data-copy="irm https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.ps1 | iex">Copy</button>
+        </div>
+      </div>
+
+      <p class="install-note reveal">Installs to <span class="mono">~/.atelier</span> · auto-detects your agent · <span class="accent">restart it afterwards</span></p>
+
+      <p class="center reveal" style="margin-top:26px"><a href="install.html">Flags, seven hosts, and troubleshooting →</a></p>
+
+      <div class="restart reveal" style="margin-top:56px">Restart your agent after installing. Skills register at startup, not mid-session.</div>
     </div>
   </section>
 
@@ -430,12 +484,13 @@ td.dep{color:var(--muted);font-size:13px}
 
 <footer class="site-foot">
   <div class="wrap foot-inner">
-    <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Atelier</a>
+    <a href="index.html"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Atelier</a>
     <a href="routers.html">Routers</a>
     <a href="install.html">Install</a>
     <a href="about.html">About</a>
     <a href="https://github.com/vietnamtrainingpilot-oss/atelier">GitHub ↗</a>
     <p class="foot-note">MIT licensed. Skills belong to their original authors.</p>
+    <p class="credit">Built with the <a href="routers.html#web-design">Atelier</a> web-design router · <code>impeccable-design-polish</code></p>
   </div>
 </footer>
 
@@ -479,13 +534,11 @@ td.dep{color:var(--muted);font-size:13px}
   }
 
   document.querySelectorAll('[data-copy]').forEach(function (button) {
-    var slot = button.querySelector('.copy-label');
-    if (!slot) return;
-    var was = slot.textContent;
+    var was = button.textContent;
     function flash(label) {
-      slot.textContent = label;
+      button.textContent = label;
       button.classList.add('is-done');
-      window.setTimeout(function () { slot.textContent = was; button.classList.remove('is-done'); }, 1600);
+      window.setTimeout(function () { button.textContent = was; button.classList.remove('is-done'); }, 1600);
     }
     function legacyCopy(text) {
       var ta = document.createElement('textarea');

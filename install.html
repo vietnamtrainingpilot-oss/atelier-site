@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F2EC'/%3E%3Cpath d='M8 14 16 8l8 6v10h-6v-6h-4v6H8z' fill='%23B4552D'/%3E%3C/svg%3E">
 <title>Install — Atelier</title>
-<meta name="description" content="Install Atelier with one line. Node 18+, seven agent hosts, flags, and troubleshooting.">
+<meta name="description" content="Install Atelier: one line for macOS, Linux and PowerShell. Flags, seven agent hosts, and troubleshooting.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F2EC'/%3E%3Cpath d='M8 14 16 8l8 6v10h-6v-6h-4v6H8z' fill='%23B4552D'/%3E%3C/svg%3E">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 :root{
@@ -20,80 +20,121 @@
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
 }
 html{-webkit-text-size-adjust:100%;background:var(--paper)}
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--serif);
-  font-size:18px;
-  line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-}
-main,.section,.site-head,.site-foot{background:var(--paper)}
-h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;margin:0}
-h1{font-size:clamp(34px,6.2vw,62px);line-height:1.06}
-h2{font-size:clamp(26px,3.6vw,38px);line-height:1.14}
-h3{font-size:clamp(19px,2.1vw,22px);line-height:1.26}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
+main,.site-head,.site-foot,.section{background:var(--paper)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0}
+h1{font-size:clamp(36px,5.4vw,58px);line-height:1.06;letter-spacing:-.02em}
+h2{font-size:28px;line-height:1.16;letter-spacing:-.012em}
+h2.lead{font-size:32px}
+h3{font-size:21px;line-height:1.26}
 p{margin:0}
 a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
 a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:.12em .34em}
-pre{margin:0;font-family:var(--mono);font-size:14px;line-height:1.7;background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:18px 20px;overflow-x:auto}
-pre code{background:none;border:0;padding:0;font-size:inherit}
 .wrap{max-width:1080px;margin-inline:auto;padding-inline:clamp(20px,5vw,40px)}
-.prose{max-width:66ch;margin-inline:auto}
+.prose{max-width:66ch}
 .center{text-align:center}
-.eyebrow{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
-.lede{font-size:clamp(17px,1.55vw,20px);color:var(--ink-2)}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:19px;color:var(--ink-2)}
 .muted{color:var(--muted)}
-.section{padding:clamp(60px,8vw,112px) 0;border-top:1px solid var(--rule)}
-.section-head{text-align:center;margin-bottom:clamp(34px,5vw,56px)}
-.section-head p{margin-top:16px;color:var(--ink-2)}
+.mono{font-family:var(--mono)}
+
+.section{padding:88px 0;border-top:1px solid var(--rule)}
+.section.tight{padding:60px 0}
+.section.roomy{padding:132px 0}
+.section.airy{padding:164px 0}
+.section-head{margin-bottom:42px}
+.section-head p{margin-top:14px;color:var(--ink-2);max-width:56ch}
+.section-head.center p{margin-inline:auto}
+.scroll-anchor{scroll-margin-top:96px}
+
 .skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--paper);border:1px solid var(--ink);border-radius:2px;padding:10px 16px;text-decoration:none}
 .skip:focus{left:12px;top:12px;color:var(--accent);border-color:var(--accent)}
-.site-head{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid transparent}
+.site-head{position:sticky;top:0;z-index:50;border-bottom:1px solid transparent}
 .site-head.is-stuck{border-bottom-color:var(--rule)}
 .nav{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;padding:15px 0}
 .brand{display:inline-flex;align-items:center;text-decoration:none;font-size:17px;white-space:nowrap}
 .mark{display:inline-block;vertical-align:-.05em;width:.8em;height:.8em;margin-right:.34em;color:var(--accent);flex:0 0 auto}
-.nav-links{margin-left:auto;display:flex;align-items:baseline;gap:clamp(14px,2.4vw,26px);flex-wrap:wrap}
+.nav-links{margin-left:auto;display:flex;align-items:baseline;gap:26px;flex-wrap:wrap}
 .nav-links a{text-decoration:none;font-size:15px;color:var(--ink-2)}
 .nav-links a:hover,.nav-links a[aria-current]{color:var(--accent)}
-.btn{display:inline-block;padding:12px 22px;border:1px solid var(--ink);border-radius:2px;background:transparent;color:var(--ink);font-family:var(--serif);font-size:16px;text-decoration:none;cursor:pointer;line-height:1.3}
+.btn{display:inline-block;padding:12px 22px;border:1px solid var(--ink);border-radius:2px;background:transparent;color:var(--ink);font-family:var(--serif);font-size:16px;text-decoration:none;line-height:1.3}
 .btn:hover{border-color:var(--accent);color:var(--accent)}
 .btn-solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .btn-solid:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
-.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 
-.cmd{display:flex;align-items:center;gap:14px;justify-content:space-between;max-width:560px;margin-inline:auto;padding:16px 18px 16px 20px;border:1px solid var(--ink);border-radius:2px;background:var(--card)}
-.cmd code{background:none;border:0;padding:0;font-size:15px;white-space:nowrap}
-.copy{flex:0 0 auto;padding:7px 12px;border:1px solid var(--rule);border-radius:2px;background:var(--paper);font-family:var(--serif);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);cursor:pointer}
+/* copy control */
+.copy{display:inline-flex;align-items:center;gap:12px;padding:9px 16px;border:1px solid var(--rule);border-radius:2px;background:var(--paper);font-family:var(--serif);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap}
 .copy:hover{border-color:var(--accent);color:var(--accent)}
 .copy.is-done{color:var(--accent);border-color:var(--accent)}
 
-.table-scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:2px;background:var(--card)}
-table{border-collapse:collapse;width:100%;min-width:620px;font-size:15px}
-th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
-thead th{background:var(--paper);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400;white-space:nowrap}
+/* methods */
+.methods{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.method{padding:22px 24px 24px;border:1px solid var(--rule);border-radius:2px;background:var(--card)}
+.method.lead{border-left:2px solid var(--accent)}
+.method-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.method-head b{font-weight:400;font-size:17px}
+.method-head span{font-size:13px;color:var(--muted)}
+.method code{display:block;margin-top:14px;background:none;border:0;padding:0;font-size:13px;line-height:1.75;word-break:break-all;color:var(--ink)}
+.method .copy{margin-top:16px}
+
+.clone{margin-top:44px}
+.clone h3{margin-bottom:6px}
+.clone p{color:var(--ink-2);font-size:17px;margin-bottom:18px}
+.clone-block{border-left:2px solid var(--rule);padding:4px 0 4px 20px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.clone-line{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.clone-line code{background:none;border:0;padding:0;font-size:13.5px;color:var(--ink)}
+.clone-note{margin-top:18px;color:var(--muted);font-size:15px}
+
+/* hosts table */
+.hosts-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:2px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:15.5px}
+th,td{text-align:left;padding:18px 22px;border-bottom:1px solid var(--rule);vertical-align:middle}
+thead th{background:var(--paper);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:400;white-space:nowrap}
+tbody tr{transition:background .18s ease}
+tbody tr:hover{background:rgba(180,85,45,.04)}
 tbody tr:last-child td{border-bottom:0}
-td code{white-space:nowrap}
+td.agent{font-size:18px;width:190px}
+td.path code{font-size:13px;white-space:nowrap}
+td.cmd{display:flex;align-items:center;gap:14px}
+td.cmd code{font-size:13px;background:none;border:0;padding:0;white-space:nowrap}
+.ps-note{margin-top:20px;font-size:15px;color:var(--muted)}
 
-.flow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;margin-top:26px}
-.flow span{border:1px solid var(--rule);border-radius:2px;background:var(--card);padding:9px 16px;font-size:15px}
-.flow i{color:var(--muted);font-style:normal}
+/* skills cli + single router blocks */
+.cli{padding:24px 26px 26px;border:1px solid var(--rule);border-radius:2px;background:var(--card)}
+.cli code{display:block;margin:16px 0;background:none;border:0;padding:0;font-size:14px;color:var(--ink)}
+.caveat{margin-top:22px;padding:18px 20px;border-left:2px solid var(--rule);background:var(--paper);border-radius:0 2px 2px 0;font-size:16px;color:var(--ink-2)}
+.caveat b{font-weight:400;color:var(--ink)}
+.routers-list{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.routers-list .clone-line code{font-size:14px}
+.below{margin-top:20px;color:var(--muted);font-size:16px;max-width:60ch}
 
-.faq{max-width:800px;margin-inline:auto}
-.faq div + div{border-top:1px solid var(--rule);margin-top:clamp(30px,4vw,44px);padding-top:clamp(30px,4vw,44px)}
+/* flags */
+.flags th:first-child{width:210px}
+.flags td:first-child code{white-space:nowrap}
+.flags td{font-size:15.5px;color:var(--ink-2)}
+.agent-values{margin-top:22px;font-size:15px;color:var(--muted)}
+.agent-values code{font-size:13px}
+
+.restart{margin:0 auto;max-width:640px;padding:28px 30px;text-align:center;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:18px;color:var(--ink-2)}
+
+/* troubleshooting */
+.faq{max-width:760px;margin-inline:auto}
+.faq > div + div{border-top:1px solid var(--rule);margin-top:38px;padding-top:38px}
 .faq h3{margin-bottom:12px}
 .faq p{color:var(--ink-2)}
 .faq p + p{margin-top:14px}
 
-.site-foot{border-top:1px solid var(--rule);padding:44px 0}
+.site-foot{border-top:1px solid var(--rule);padding:46px 0}
 .foot-inner{display:flex;gap:18px 30px;flex-wrap:wrap;align-items:baseline;justify-content:center;text-align:center}
 .foot-inner a{display:inline-flex;align-items:center;text-decoration:none;font-size:15px;color:var(--ink-2)}
 .foot-inner a:hover{color:var(--accent)}
 .foot-note{width:100%;text-align:center;font-size:14px;color:var(--muted)}
+.credit{width:100%;text-align:center;font-size:13px;color:var(--muted);margin-top:10px}
+.credit a{font-size:13px;color:var(--muted)}
+.credit code{background:none;border:0;padding:0;font-size:12px;color:var(--muted)}
 
 .js .reveal{opacity:0;transform:translateY(14px)}
 .js .reveal.is-in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
@@ -101,10 +142,24 @@ td code{white-space:nowrap}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .js .reveal{opacity:1;transform:none}
 }
-@media (max-width:640px){
+
+@media (max-width:760px){
   body{font-size:17px}
+  h1{font-size:34px}
+  h2{font-size:23px}
+  h2.lead{font-size:25px}
+  h3{font-size:18px}
+  .lede{font-size:17px}
+  .section{padding:56px 0}
+  .section.tight{padding:40px 0}
+  .section.roomy{padding:80px 0}
+  .section.airy{padding:92px 0}
   .nav{gap:10px 18px;padding:12px 0}
-  .cmd{flex-direction:column;align-items:flex-start;gap:12px}
+  .nav-links{gap:16px}
+  .methods{grid-template-columns:1fr}
+  .clone-block{padding-left:16px}
+  .restart{font-size:16px;padding:22px 20px}
+  .caveat{font-size:15px}
 }
 </style>
 </head>
@@ -125,31 +180,123 @@ td code{white-space:nowrap}
 
 <main id="main">
 
-  <section class="section" style="border-top:0">
+  <section class="section" style="border-top:0;padding-top:110px">
+    <div class="wrap center">
+      <p class="eyebrow reveal"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Install</p>
+      <h1 class="reveal" style="margin-top:22px">Two lines, then you're routing.</h1>
+      <p class="lede reveal" style="max-width:48ch;margin:24px auto 0">Node 18 or later. Two lines, or one if your agent hasn't been run yet — auto-detection can only see agents whose config directories already exist.</p>
+    </div>
+  </section>
+
+  <section class="section" id="methods">
     <div class="wrap">
-      <div class="center">
-        <p class="eyebrow reveal">Install</p>
-        <h1 class="reveal" style="margin-top:22px">One line, then restart.</h1>
-        <p class="lede reveal" style="max-width:60ch;margin:22px auto 0">Requires Node 18+ and git. Nothing is registered until your agent restarts — skills load at startup, so a running session will not see them.</p>
+      <div class="section-head reveal">
+        <h2 class="lead">One line, auto-detected across seven agents.</h2>
+        <p>Both one-liners clone to <code>~/.atelier</code> and forward every argument through to <code>node install.mjs</code>, so all flags below work unchanged.</p>
+      </div>
 
-        <div class="reveal" style="margin-top:38px">
-          <div class="cmd">
-            <code>node install.mjs</code>
-            <button class="copy" type="button" data-copy="node install.mjs">Copy</button>
-          </div>
+      <div class="methods reveal">
+        <div class="method lead">
+          <div class="method-head"><b>bash</b><span>macOS · Linux · Git Bash</span></div>
+          <code>curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash</code>
+          <button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash">Copy</button>
         </div>
+        <div class="method">
+          <div class="method-head"><b>powershell</b><span>PowerShell 5.1+</span></div>
+          <code>irm https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.ps1 | iex</code>
+          <button class="copy" type="button" data-copy="irm https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.ps1 | iex">Copy</button>
+        </div>
+      </div>
 
-        <p class="reveal muted" style="margin-top:26px;font-size:15px">Run it from a clone:</p>
-        <div class="reveal" style="max-width:640px;margin:14px auto 0;text-align:left">
-          <pre><code>git clone https://github.com/vietnamtrainingpilot-oss/atelier
-cd atelier
-node install.mjs</code></pre>
+      <div class="clone reveal">
+        <h3>Prefer to clone it yourself?</h3>
+        <p>Useful if you want to read the installer before it runs.</p>
+        <div class="clone-block">
+          <div class="clone-line"><code>git clone https://github.com/vietnamtrainingpilot-oss/atelier</code><button class="copy" type="button" data-copy="git clone https://github.com/vietnamtrainingpilot-oss/atelier">Copy</button></div>
+          <div class="clone-line"><code>cd atelier</code><button class="copy" type="button" data-copy="cd atelier">Copy</button></div>
+          <div class="clone-line"><code>node install.mjs</code><button class="copy" type="button" data-copy="node install.mjs">Copy</button></div>
         </div>
+        <p class="clone-note">The clone is reusable — <code>git pull</code> then re-run the installer to update.</p>
+      </div>
+    </div>
+  </section>
 
-        <p class="reveal muted" style="margin-top:26px;font-size:15px">Or skip the clone entirely:</p>
-        <div class="reveal" style="max-width:640px;margin:14px auto 0;text-align:left">
-          <pre><code>curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash</code></pre>
-        </div>
+  <section class="section roomy" id="hosts">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <h2>Pick your agent.</h2>
+        <p>Same plugin, same routers. Only the path changes.</p>
+      </div>
+
+      <div class="hosts-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Agent</th>
+              <th scope="col">Installs to</th>
+              <th scope="col">Command</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="agent">opencode</td>
+              <td class="path"><code>~/.config/opencode/skills</code></td>
+              <td class="cmd"><code>curl -fsSL …/install.sh | bash --agent opencode</code><button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash --agent opencode">Copy</button></td>
+            </tr>
+            <tr>
+              <td class="agent">Claude Code</td>
+              <td class="path"><code>~/.claude/skills</code></td>
+              <td class="cmd"><code>… | bash --agent claude</code><button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash --agent claude">Copy</button></td>
+            </tr>
+            <tr>
+              <td class="agent">Cursor</td>
+              <td class="path"><code>~/.cursor/skills</code></td>
+              <td class="cmd"><code>… | bash --agent cursor</code><button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash --agent cursor">Copy</button></td>
+            </tr>
+            <tr>
+              <td class="agent">Codex</td>
+              <td class="path"><code>~/.codex/skills</code></td>
+              <td class="cmd"><code>… | bash --agent codex</code><button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash --agent codex">Copy</button></td>
+            </tr>
+            <tr>
+              <td class="agent">Windsurf</td>
+              <td class="path"><code>~/.codeium/windsurf/skills</code></td>
+              <td class="cmd"><code>… | bash --agent windsurf</code><button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash --agent windsurf">Copy</button></td>
+            </tr>
+            <tr>
+              <td class="agent">Gemini CLI</td>
+              <td class="path"><code>~/.gemini/skills</code></td>
+              <td class="cmd"><code>… | bash --agent gemini</code><button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash --agent gemini">Copy</button></td>
+            </tr>
+            <tr>
+              <td class="agent">Generic</td>
+              <td class="path"><code>~/.agents/skills</code></td>
+              <td class="cmd"><code>… | bash --agent agents</code><button class="copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/vietnamtrainingpilot-oss/atelier/main/install.sh | bash --agent agents">Copy</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="ps-note reveal">On PowerShell, append <code>-agent claude</code> instead of <code>--agent claude</code>.</p>
+      <p class="ps-note reveal" style="margin-top:10px">Auto-detection checks <code>opencode</code>, <code>claude</code>, <code>cursor</code>, <code>codex</code>, then <code>agents</code>. Windsurf and Gemini are reachable only with <code>--agent</code>.</p>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Already use the skills CLI?</h2>
+        <p>One command, no installer script.</p>
+      </div>
+
+      <div class="cli reveal">
+        <code>npx skills add vietnamtrainingpilot-oss/atelier</code>
+        <button class="copy" type="button" data-copy="npx skills add vietnamtrainingpilot-oss/atelier">Copy</button>
+      </div>
+
+      <div class="caveat reveal">
+        <p>The <code>skills</code> CLI copies router skills only. For the full install — bundled skills, the opencode plugin, security subagents, dependency resolution — use the installer above.</p>
+        <p style="margin-top:14px">There is also a reason the installer avoids it internally: <code>npx skills add</code> re-spawns a bare <code>npx</code>, which fails with <code>ENOENT</code> on Windows whenever stdio is piped, and pulls an npm dependency in for what is only a clone and a copy.</p>
       </div>
     </div>
   </section>
@@ -157,126 +304,96 @@ node install.mjs</code></pre>
   <section class="section">
     <div class="wrap">
       <div class="section-head reveal">
-        <h2>What it actually does</h2>
-        <p>Three steps, in this order, for every skill the routers declare.</p>
+        <h2>Only need one domain?</h2>
+        <p class="muted" style="margin-top:14px">Run these from inside the clone — <code>cd ~/.atelier</code> first.</p>
       </div>
 
-      <div class="prose reveal">
-        <h3 style="margin-bottom:12px">1. Resolves each dependency</h3>
-        <p>For every skill a router requires, the installer looks in three places and takes the first hit. An existing install wins, so re-running is safe and never clobbers a skill you already had.</p>
-        <div class="flow">
-          <span>already installed</span><i>→</i><span>bundled in the repo</span><i>→</i><span>public GitHub</span>
-        </div>
-
-        <h3 style="margin:44px 0 12px">2. Writes to your host's skill root</h3>
-        <p>It detects the agent you are running under, then copies skills into that host's directory. Thirty-six skills ship inside the repository — the ones whose upstream was never public — so an offline install still gives you a working core. The remaining public skills are cloned from their own GitHub sources at install time.</p>
-
-        <h3 style="margin:44px 0 12px">3. Writes the parts that are not skills</h3>
-        <p>The eight <code>cs-*</code> security subagents, and on opencode the plugin that nudges a router when its stack is incomplete. It also rewrites <code>CLAUDE_PLUGIN_ROOT</code> inside <code>claude-security</code>'s markdown, which is unset outside Claude Code and breaks that skill if left alone.</p>
-
-        <p class="muted" style="margin-top:34px">A fetch that fails is reported, not hidden. The router still loads and tells you which skills it could not get.</p>
+      <div class="routers-list reveal">
+        <div class="clone-line"><code>node install.mjs web-design</code><button class="copy" type="button" data-copy="node install.mjs web-design">Copy</button></div>
+        <div class="clone-line"><code>node install.mjs video-production</code><button class="copy" type="button" data-copy="node install.mjs video-production">Copy</button></div>
+        <div class="clone-line"><code>node install.mjs security</code><button class="copy" type="button" data-copy="node install.mjs security">Copy</button></div>
       </div>
+
+      <p class="below reveal">Installing one router installs its skills only. Everything else can come later.</p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section tight">
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Flags</h2>
+        <p>All verified against <code>install.mjs</code>.</p>
       </div>
 
-      <div class="table-scroll reveal">
-        <table>
+      <div class="hosts-wrap reveal">
+        <table class="flags">
           <thead>
-            <tr><th scope="col">Flag</th><th scope="col">Effect</th></tr>
+            <tr><th scope="col">Flag</th><th scope="col">What it does</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>--check</code></td><td>Report what would change. Installs nothing, fetches nothing.</td></tr>
-            <tr><td><code>--list</code></td><td>List every router with its dependency count.</td></tr>
-            <tr><td><code>--offline</code></td><td>Install from bundled skills only. Zero network requests.</td></tr>
-            <tr><td><code>--prefer-network</code></td><td>Refresh public skills from upstream even when a bundled copy exists.</td></tr>
-            <tr><td><code>--force</code></td><td>Overwrite existing skills. Without it, an existing copy is left alone.</td></tr>
-            <tr><td><code>--agent &lt;name&gt;</code></td><td>Target a host explicitly: <code>opencode</code>, <code>claude</code>, <code>agents</code>, <code>cursor</code>, <code>codex</code>, <code>windsurf</code>, <code>gemini</code>.</td></tr>
-            <tr><td><code>--root &lt;path&gt;</code></td><td>Install somewhere else entirely.</td></tr>
-            <tr><td><code>--json</code></td><td>Machine-readable summary on stdout.</td></tr>
-            <tr><td><code>--in-place</code></td><td>Install the routers into the current checkout instead of a managed copy.</td></tr>
+            <tr><td><code>(none)</code></td><td>Install everything, bundled skills first</td></tr>
+            <tr><td><code>&lt;router&gt;</code></td><td>Install a single router, e.g. <code>web-design</code></td></tr>
+            <tr><td><code>--agent &lt;name&gt;</code></td><td>Skip auto-detection and target one host</td></tr>
+            <tr><td><code>--root &lt;path&gt;</code></td><td>Install to a custom directory instead of the agent's skills root</td></tr>
+            <tr><td><code>--offline</code></td><td>Bundled skills only, zero network requests</td></tr>
+            <tr><td><code>--prefer-network</code></td><td>Refresh public skills from upstream even when a bundled copy exists</td></tr>
+            <tr><td><code>--check</code></td><td>Report what would happen, change nothing</td></tr>
+            <tr><td><code>--force</code></td><td>Overwrite skills that are already installed</td></tr>
+            <tr><td><code>--list</code></td><td>Print the eight routers and exit</td></tr>
+            <tr><td><code>--json</code></td><td>Machine-readable summary on stdout</td></tr>
+            <tr><td><code>--in-place</code></td><td>Install into the clone instead of a skill root</td></tr>
           </tbody>
         </table>
       </div>
 
-      <p class="reveal" style="max-width:800px;margin:26px auto 0;color:var(--ink-2)">Name a router instead of a flag to install just that domain: <code>node install.mjs web-design</code>, or <code>node install.mjs --check seo</code> to see what it would do.</p>
+      <p class="agent-values reveal"><code>--agent</code> accepts exactly: <code>opencode</code>, <code>claude</code>, <code>cursor</code>, <code>codex</code>, <code>windsurf</code>, <code>gemini</code>, <code>agents</code>.</p>
+    </div>
+  </section>
+
+  <section class="section roomy">
+    <div class="wrap">
+      <div class="restart reveal">Restart your agent after installing. Skills register at startup, not mid-session.</div>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head reveal">
-        <h2>Seven hosts</h2>
-        <p>Detection tries <code>opencode</code> → <code>claude</code> → <code>cursor</code> → <code>codex</code> → <code>agents</code>, first match wins. If none of those roots exist on disk, it falls through the whole chain and takes the first one that does.</p>
-      </div>
-
-      <div class="table-scroll reveal">
-        <table>
-          <thead>
-            <tr><th scope="col">Host</th><th scope="col">Skills land in</th><th scope="col">Also written</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>opencode</td><td><code>~/.config/opencode/skills</code></td><td>plugin → <code>~/.config/opencode/plugins/atelier.ts</code>; security agents → <code>~/.config/opencode/agent/</code></td></tr>
-            <tr><td>Claude Code</td><td><code>~/.claude/skills</code></td><td>security agents → <code>~/.claude/agents/</code>; the <code>.claude-plugin/</code> manifest registers it in Claude Code</td></tr>
-            <tr><td>agents</td><td><code>~/.agents/skills</code></td><td>— the fallback when no other host matches</td></tr>
-            <tr><td>Cursor</td><td><code>~/.cursor/skills</code></td><td>—</td></tr>
-            <tr><td>Codex</td><td><code>~/.codex/skills</code></td><td>—</td></tr>
-            <tr><td>Windsurf</td><td><code>~/.codeium/windsurf/skills</code></td><td>—</td></tr>
-            <tr><td>Gemini</td><td><code>~/.gemini/skills</code></td><td>—</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p class="reveal" style="max-width:800px;margin:26px auto 0;color:var(--ink-2)">On opencode the plugin also drops a pointer file at <code>~/.config/opencode/atelier-home</code> recording where Atelier lives, so it can self-install later without being re-cloned.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <h2>Troubleshooting</h2>
+      <div class="section-head center reveal">
+        <h2>When it goes wrong.</h2>
+        <p>The five failures that actually come up.</p>
       </div>
 
       <div class="faq reveal">
         <div>
-          <h3>The skills are installed but the agent cannot see them.</h3>
-          <p>Restart it. Skills are only registered at startup, so a session that was already running when you installed will keep its old list no matter what.</p>
+          <h3>Installed, but the agent cannot see the skills.</h3>
+          <p>Restart it. Skills register at startup only, so a session that was already running keeps its old list no matter what you install.</p>
         </div>
         <div>
           <h3>It picked the wrong host.</h3>
-          <p>Pass it explicitly: <code>node install.mjs --agent claude</code>. Detection only looks at which config directories exist, so an agent you have installed but never run may not be on disk yet.</p>
+          <p>Pass <code>--agent &lt;name&gt;</code> explicitly. Detection only looks for config directories that already exist on disk, so an agent you installed but never launched may not be visible to it yet.</p>
         </div>
         <div>
           <h3>A public skill failed to fetch.</h3>
-          <p>Usually a network or git problem, not an Atelier bug. Re-run without <code>--offline</code>, or point <code>--root</code> at the directory you wanted and try <code>--prefer-network</code> to bypass a stale bundled copy.</p>
+          <p>Usually a network or git problem rather than an Atelier bug. Re-run without <code>--offline</code>, or use <code>--prefer-network</code> to bypass a stale bundled copy.</p>
         </div>
         <div>
-          <h3>A router reports that a skill is missing.</h3>
+          <h3>A router reports a skill is missing.</h3>
           <p>That is deliberate — it will not pretend a skill is present. Run <code>node install.mjs &lt;router&gt; --check</code> to see exactly which ones it could not resolve.</p>
         </div>
         <div>
-          <h3>You want zero network traffic.</h3>
-          <p><code>node install.mjs --offline</code>. The thirty-six bundled skills still install; the public ones are reported unavailable instead of being silently skipped.</p>
-        </div>
-        <div>
           <h3><code>claude-security</code> mentions an unset variable.</h3>
-          <p>Its markdown references <code>${CLAUDE_PLUGIN_ROOT}</code>, which only exists inside Claude Code. The installer rewrites it to the real path on install; re-run with <code>--force</code> if you copied it in by hand.</p>
+          <p>Its markdown references <code>${CLAUDE_PLUGIN_ROOT}</code>, which only exists inside Claude Code. The installer rewrites it to the real absolute path on install; re-run with <code>--force</code> if you copied it in by hand.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section airy">
     <div class="wrap center">
       <div class="reveal">
-        <h2>Then invoke a router.</h2>
-        <p class="lede" style="max-width:52ch;margin:16px auto 0">You name the domain. It names the specialist.</p>
-        <div class="actions">
+        <h2>Then name a domain.</h2>
+        <p class="lede" style="max-width:46ch;margin:16px auto 0">You state the job. The router names the specialist.</p>
+        <div class="actions" style="margin-top:34px">
           <a class="btn btn-solid" href="routers.html">The eight routers →</a>
           <a class="btn" href="about.html">Why it works this way →</a>
         </div>
@@ -288,12 +405,13 @@ node install.mjs</code></pre>
 
 <footer class="site-foot">
   <div class="wrap foot-inner">
-    <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Atelier</a>
+    <a href="index.html"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Atelier</a>
     <a href="routers.html">Routers</a>
     <a href="install.html">Install</a>
     <a href="about.html">About</a>
     <a href="https://github.com/vietnamtrainingpilot-oss/atelier">GitHub ↗</a>
     <p class="foot-note">MIT licensed. Skills belong to their original authors.</p>
+    <p class="credit">Built with the <a href="routers.html#web-design">Atelier</a> web-design router · <code>impeccable-design-polish</code></p>
   </div>
 </footer>
 
@@ -375,6 +493,7 @@ node install.mjs</code></pre>
     target.scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth', block: 'start' });
     target.setAttribute('tabindex', '-1');
     target.focus({ preventScroll: true });
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
   });
 })();
 </script>

@@ -85,6 +85,9 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
 .foot-inner a:hover{color:var(--accent)}
 .foot-note{width:100%;text-align:center;font-size:14px;color:var(--muted)}
 
+.credit{width:100%;text-align:center;font-size:13px;color:var(--muted);margin-top:10px}
+.credit a{font-size:13px;color:var(--muted)}
+.credit code{background:none;border:0;padding:0;font-size:12px;color:var(--muted)}
 .js .reveal{opacity:0;transform:translateY(14px)}
 .js .reveal.is-in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
 @media (prefers-reduced-motion: reduce){
@@ -136,9 +139,10 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
       </div>
 
       <div class="prose reveal">
-        <p>Install forty skills and every request turns into the same unfun question: which eleven of these forty do I need this time? Worse, a fifth of them are near-duplicates competing for the same job — four different taste skills that each impose a completely different visual language, none of which can tell you it is the wrong one for this page.</p>
+<p>Install forty skills and every request turns into the same unfun question: which eleven of these forty do I need this time? Worse, a fifth of them are near-duplicates competing for the same job — four different taste skills that each impose a completely different visual language, none of which can tell you it is the wrong one for this page.</p>
         <p style="margin-top:22px">Atelier replaces you with eight entry points. Each one knows its whole domain, names a lead, adds at most two supports, and hands off to another router when the work crosses a boundary. You stop choosing between specialists. You state the job.</p>
         <p style="margin-top:22px">That is the entire claim, and it is a small one on purpose. It is not that the specialists got better — they are the same skills other people already wrote and published. It is that you no longer have to know they exist, or know which of them to trust for which job.</p>
+        <p style="margin-top:22px">Getting there costs one line. It clones the repo to <code>~/.atelier</code>, works out which agent you are running, and writes 105 skills into that agent's skills directory. Thirty-six of them ship inside the plugin; the rest are cloned from their own upstream at install time.</p>
       </div>
     </div>
   </section>
@@ -228,10 +232,10 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
   <section class="section">
     <div class="wrap center">
       <div class="reveal">
-        <h2>Judge it on one line.</h2>
-        <p class="lede" style="max-width:54ch;margin:16px auto 0">Install it, invoke one router, and see whether the selection it printed was the one you would have made.</p>
+<h2>Judge it on one line.</h2>
+        <p class="lede" style="max-width:54ch;margin:16px auto 0">One line, auto-detected across seven agents. Restart your agent, invoke one router, and see whether the selection it printed was the one you would have made.</p>
         <div class="actions">
-          <a class="btn btn-solid" href="install.html">node install.mjs</a>
+          <a class="btn btn-solid" href="install.html">Two lines, then you're routing</a>
           <a class="btn" href="routers.html">Read the routers first →</a>
         </div>
       </div>
@@ -248,6 +252,7 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
     <a href="about.html">About</a>
     <a href="https://github.com/vietnamtrainingpilot-oss/atelier">GitHub ↗</a>
     <p class="foot-note">MIT licensed. Skills belong to their original authors.</p>
+    <p class="credit">Built with the <a href="routers.html#web-design">Atelier</a> web-design router · <code>impeccable-design-polish</code></p>
   </div>
 </footer>
 
