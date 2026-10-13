@@ -12,7 +12,7 @@
   --paper:#F5F2EC;
   --ink:#14120F;
   --ink-2:#3A352E;
-  --muted:#7A7267;
+  --muted:#6E675C;
   --rule:#D8D2C6;
   --card:#FBF9F4;
   --accent:#B4552D;
@@ -20,6 +20,7 @@
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
 }
 html{-webkit-text-size-adjust:100%;background:var(--paper)}
+[id]{scroll-margin-top:96px}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
 main,.site-head,.site-foot,.section{background:var(--paper)}
 h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0}
@@ -28,7 +29,7 @@ h2{font-size:28px;line-height:1.16;letter-spacing:-.012em}
 h2.lead{font-size:32px}
 h3{font-size:21px;line-height:1.26}
 p{margin:0}
-a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:3px}
 a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:.12em .34em}
@@ -51,6 +52,7 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
 
 .skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--paper);border:1px solid var(--ink);border-radius:2px;padding:10px 16px;text-decoration:none}
 .skip:focus{left:12px;top:12px;color:var(--accent);border-color:var(--accent)}
+:target{scroll-margin-top:96px}
 .site-head{position:sticky;top:0;z-index:50;border-bottom:1px solid transparent}
 .site-head.is-stuck{border-bottom-color:var(--rule)}
 .nav{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;padding:15px 0}
@@ -68,6 +70,8 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
 /* copy control */
 .copy{display:inline-flex;align-items:center;gap:12px;padding:9px 16px;border:1px solid var(--rule);border-radius:2px;background:var(--paper);font-family:var(--serif);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap}
 .copy:hover{border-color:var(--accent);color:var(--accent)}
+.copy:active{background:var(--card)}
+.btn:active{transform:translateY(1px)}
 .copy.is-done{color:var(--accent);border-color:var(--accent)}
 
 /* methods */
