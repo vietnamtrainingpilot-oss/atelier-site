@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F2EC'/%3E%3Cpath d='M8 14 16 8l8 6v10h-6v-6h-4v6H8z' fill='%23B4552D'/%3E%3C/svg%3E">
+<title>About — Atelier</title>
+<meta name="description" content="Why Atelier exists, what it values, and what it cannot do.">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --paper:#F5F2EC;
+  --ink:#14120F;
+  --ink-2:#3A352E;
+  --muted:#7A7267;
+  --rule:#D8D2C6;
+  --card:#FBF9F4;
+  --accent:#B4552D;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+html{-webkit-text-size-adjust:100%;background:var(--paper)}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:18px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+main,.section,.site-head,.site-foot{background:var(--paper)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;margin:0}
+h1{font-size:clamp(34px,6.2vw,62px);line-height:1.06}
+h2{font-size:clamp(26px,3.6vw,38px);line-height:1.14}
+h3{font-size:clamp(19px,2.1vw,22px);line-height:1.26}
+p{margin:0}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:.12em .34em}
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:clamp(20px,5vw,40px)}
+.prose{max-width:66ch;margin-inline:auto}
+.center{text-align:center}
+.eyebrow{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:clamp(17px,1.55vw,20px);color:var(--ink-2)}
+.muted{color:var(--muted)}
+.section{padding:clamp(60px,8vw,112px) 0;border-top:1px solid var(--rule)}
+.section-head{text-align:center;margin-bottom:clamp(34px,5vw,56px)}
+.section-head p{margin-top:16px;color:var(--ink-2)}
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--paper);border:1px solid var(--ink);border-radius:2px;padding:10px 16px;text-decoration:none}
+.skip:focus{left:12px;top:12px;color:var(--accent);border-color:var(--accent)}
+.site-head{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid transparent}
+.site-head.is-stuck{border-bottom-color:var(--rule)}
+.nav{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;padding:15px 0}
+.brand{display:inline-flex;align-items:center;text-decoration:none;font-size:17px;white-space:nowrap}
+.mark{display:inline-block;vertical-align:-.05em;width:.8em;height:.8em;margin-right:.34em;color:var(--accent);flex:0 0 auto}
+.nav-links{margin-left:auto;display:flex;align-items:baseline;gap:clamp(14px,2.4vw,26px);flex-wrap:wrap}
+.nav-links a{text-decoration:none;font-size:15px;color:var(--ink-2)}
+.nav-links a:hover,.nav-links a[aria-current]{color:var(--accent)}
+.btn{display:inline-block;padding:12px 22px;border:1px solid var(--ink);border-radius:2px;background:transparent;color:var(--ink);font-family:var(--serif);font-size:16px;text-decoration:none;cursor:pointer;line-height:1.3}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn-solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-solid:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+
+.values{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule);border-radius:2px;background:var(--card)}
+.value{background:var(--card);padding:32px 28px;border-right:1px solid var(--rule)}
+.value:last-child{border-right:0}
+.value p{margin-top:14px;color:var(--ink-2);font-size:16px}
+
+.domains{max-width:840px;margin-inline:auto}
+.domain{display:grid;grid-template-columns:150px 1fr;gap:6px 26px;padding:26px 0;border-top:1px solid var(--rule)}
+.domain dt a{text-decoration:none;font-family:var(--mono);font-size:15px;letter-spacing:-.01em}
+.domain dt a:hover{color:var(--accent)}
+.domain dd{margin:0;color:var(--ink-2);font-size:16px}
+
+.callout{max-width:800px;margin:0 auto;padding:26px 28px;border:1px solid var(--ink);border-radius:2px;background:var(--card)}
+.callout > p:first-child{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.callout p + p{margin-top:14px;color:var(--ink-2)}
+
+.site-foot{border-top:1px solid var(--rule);padding:44px 0}
+.foot-inner{display:flex;gap:18px 30px;flex-wrap:wrap;align-items:baseline;justify-content:center;text-align:center}
+.foot-inner a{display:inline-flex;align-items:center;text-decoration:none;font-size:15px;color:var(--ink-2)}
+.foot-inner a:hover{color:var(--accent)}
+.foot-note{width:100%;text-align:center;font-size:14px;color:var(--muted)}
+
+.js .reveal{opacity:0;transform:translateY(14px)}
+.js .reveal.is-in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+}
+@media (max-width:640px){
+  body{font-size:17px}
+  .nav{gap:10px 18px;padding:12px 0}
+  .values{grid-template-columns:1fr}
+  .values .value{border-right:0;border-bottom:1px solid var(--rule)}
+  .values .value:last-child{border-bottom:0}
+  .domain{grid-template-columns:1fr;gap:6px 0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Atelier</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="routers.html">Routers</a>
+      <a href="install.html">Install</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="https://github.com/vietnamtrainingpilot-oss/atelier">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section" style="border-top:0">
+    <div class="wrap">
+      <div class="center">
+        <p class="eyebrow reveal">About</p>
+        <h1 class="reveal" style="margin-top:22px">A workshop, not a toolbox.</h1>
+        <p class="lede reveal" style="max-width:60ch;margin:22px auto 0">An atelier is where you bring the commission and someone engages the right craftsperson for it. Atelier is that word taken literally: you bring the job, it dispatches the specialist.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Why it exists</h2>
+        <p>Because skill selection had quietly become your job, and it is a bad one.</p>
+      </div>
+
+      <div class="prose reveal">
+        <p>Install forty skills and every request turns into the same unfun question: which eleven of these forty do I need this time? Worse, a fifth of them are near-duplicates competing for the same job — four different taste skills that each impose a completely different visual language, none of which can tell you it is the wrong one for this page.</p>
+        <p style="margin-top:22px">Atelier replaces you with eight entry points. Each one knows its whole domain, names a lead, adds at most two supports, and hands off to another router when the work crosses a boundary. You stop choosing between specialists. You state the job.</p>
+        <p style="margin-top:22px">That is the entire claim, and it is a small one on purpose. It is not that the specialists got better — they are the same skills other people already wrote and published. It is that you no longer have to know they exist, or know which of them to trust for which job.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>What it values</h2>
+      </div>
+
+      <div class="values reveal">
+        <div class="value">
+          <h3>Useful over impressive</h3>
+          <p>A router that installs, dispatches, verifies and hands off beats one that claims a larger surface. Coverage is not the goal; the job getting done is.</p>
+        </div>
+        <div class="value">
+          <h3>Explicit over magic</h3>
+          <p>Every selection is printed: router, lead, supports, hand-off. When something is missing it says which skill and why. It never pretends to have something it does not.</p>
+        </div>
+        <div class="value">
+          <h3>Honest about limits</h3>
+          <p>No installed skill covers infrastructure-as-code, database migrations, observability or API design. No dedicated debugging skill ships either. Those gaps are written down instead of papered over.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>The eight domains</h2>
+        <p>Named for the job, never for the tool — so the underlying skills can change without renaming anything.</p>
+      </div>
+
+      <dl class="domains reveal">
+        <div class="domain">
+          <dt><a href="routers.html#web-design">web-design</a></dt>
+          <dd>Landing pages, portfolios, redesigns, design systems, UI, and scroll or cinematic motion.</dd>
+        </div>
+        <div class="domain">
+          <dt><a href="routers.html#video-production">video-production</a></dt>
+          <dd>HTML-to-video, React video, and social promo — selected by the input you bring, not the output you want.</dd>
+        </div>
+        <div class="domain">
+          <dt><a href="routers.html#seo">seo</a></dt>
+          <dd>An ordered pipeline from project setup to the report you actually send a client.</dd>
+        </div>
+        <div class="domain">
+          <dt><a href="routers.html#backend">backend</a></dt>
+          <dd>APIs, data, auth, architecture, refactors and the archaeology of an unfamiliar codebase.</dd>
+        </div>
+        <div class="domain">
+          <dt><a href="routers.html#payments">payments</a></dt>
+          <dd>Stripe, loaded from the official source rather than from model memory, with the PCI-relevant rules enforced.</dd>
+        </div>
+        <div class="domain">
+          <dt><a href="routers.html#security">security</a></dt>
+          <dd>Scanning, verifying, patching and redacting — with the agent boundaries left intact.</dd>
+        </div>
+        <div class="domain">
+          <dt><a href="routers.html#vibe-code">vibe-code</a></dt>
+          <dd>The deliberate shortcut: vague idea in, running thing out, no ceremony in between.</dd>
+        </div>
+        <div class="domain">
+          <dt><a href="routers.html#ship-it">ship-it</a></dt>
+          <dd>The process spine. Verification is a gate you cannot walk past on a good day.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Security, and what it cannot do</h2>
+        <p>The one place where the honest answer is a limitation rather than a feature.</p>
+      </div>
+
+      <div class="callout reveal">
+        <p>Known limitation</p>
+        <p>Anthropic's <code>claude-security</code> skill orchestrates eight subagents through Claude Code's <code>Workflow(...)</code> engine. That engine does not exist in opencode, so Atelier ships the dispatch order in place of the orchestrator: inventory → research → verify → generate → verify patch. There is no one-click <code>/security</code> scan, and pretending otherwise would be the more useful lie.</p>
+        <p>Six of the eight subagents are read-only with <code>edit: deny</code>, which is the important half — a scan that cannot write cannot damage the thing it is scanning. The full list and their roles are on the <a href="routers.html#security">security router entry</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap center">
+      <div class="reveal">
+        <h2>Judge it on one line.</h2>
+        <p class="lede" style="max-width:54ch;margin:16px auto 0">Install it, invoke one router, and see whether the selection it printed was the one you would have made.</p>
+        <div class="actions">
+          <a class="btn btn-solid" href="install.html">node install.mjs</a>
+          <a class="btn" href="routers.html">Read the routers first →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Atelier</a>
+    <a href="routers.html">Routers</a>
+    <a href="install.html">Install</a>
+    <a href="about.html">About</a>
+    <a href="https://github.com/vietnamtrainingpilot-oss/atelier">GitHub ↗</a>
+    <p class="foot-note">MIT licensed. Skills belong to their original authors.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  document.documentElement.classList.add('js');
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function show(el) { el.classList.add('is-in'); }
+  var revealables = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+
+  if (reduced.matches || !('IntersectionObserver' in window)) {
+    revealables.forEach(show);
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { show(entry.target); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    revealables.forEach(function (el) { io.observe(el); });
+
+    setTimeout(function () {
+      revealables.forEach(function (el) {
+        if (el.getBoundingClientRect().top < window.innerHeight * 1.25) show(el);
+      });
+    }, 1200);
+
+    window.addEventListener('pagehide', function () { io.disconnect(); });
+  }
+
+  var head = document.querySelector('.site-head');
+  if (head && 'IntersectionObserver' in window) {
+    var sentinel = document.createElement('div');
+    sentinel.setAttribute('aria-hidden', 'true');
+    sentinel.style.cssText = 'position:absolute;top:0;width:1px;height:1px;';
+    document.body.prepend(sentinel);
+    new IntersectionObserver(function (entries) {
+      head.classList.toggle('is-stuck', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(sentinel);
+  }
+})();
+</script>
+</body>
+</html>

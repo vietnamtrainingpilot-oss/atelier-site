@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F2EC'/%3E%3Cpath d='M8 14 16 8l8 6v10h-6v-6h-4v6H8z' fill='%23B4552D'/%3E%3C/svg%3E">
+<title>Routers — Atelier</title>
+<meta name="description" content="All eight Atelier routers: dependency counts, lead skills, supports, hand-offs, environment variables and MCP servers.">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --paper:#F5F2EC;
+  --ink:#14120F;
+  --ink-2:#3A352E;
+  --muted:#7A7267;
+  --rule:#D8D2C6;
+  --card:#FBF9F4;
+  --accent:#B4552D;
+  --tint:#F6ECE5;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+html{-webkit-text-size-adjust:100%;background:var(--paper)}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:18px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+main,.section,.site-head,.site-foot{background:var(--paper)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;margin:0}
+h1{font-size:clamp(34px,6.2vw,62px);line-height:1.06}
+h2{font-size:clamp(26px,3.6vw,38px);line-height:1.14}
+h3{font-size:clamp(20px,2.4vw,26px);line-height:1.22}
+p{margin:0}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:.12em .34em}
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:clamp(20px,5vw,40px)}
+.prose{max-width:66ch;margin-inline:auto}
+.center{text-align:center}
+.eyebrow{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:clamp(17px,1.55vw,20px);color:var(--ink-2)}
+.muted{color:var(--muted)}
+.section{padding:clamp(60px,8vw,112px) 0;border-top:1px solid var(--rule)}
+.section-head{text-align:center;margin-bottom:clamp(34px,5vw,56px)}
+.section-head p{margin-top:16px;color:var(--ink-2)}
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--paper);border:1px solid var(--ink);border-radius:2px;padding:10px 16px;text-decoration:none}
+.skip:focus{left:12px;top:12px;color:var(--accent);border-color:var(--accent)}
+.site-head{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid transparent}
+.site-head.is-stuck{border-bottom-color:var(--rule)}
+.nav{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;padding:15px 0}
+.brand{display:inline-flex;align-items:center;text-decoration:none;font-size:17px;white-space:nowrap}
+.mark{display:inline-block;vertical-align:-.05em;width:.8em;height:.8em;margin-right:.34em;color:var(--accent);flex:0 0 auto}
+.nav-links{margin-left:auto;display:flex;align-items:baseline;gap:clamp(14px,2.4vw,26px);flex-wrap:wrap}
+.nav-links a{text-decoration:none;font-size:15px;color:var(--ink-2)}
+.nav-links a:hover,.nav-links a[aria-current]{color:var(--accent)}
+.btn{display:inline-block;padding:12px 22px;border:1px solid var(--ink);border-radius:2px;background:transparent;color:var(--ink);font-family:var(--serif);font-size:16px;text-decoration:none;cursor:pointer;line-height:1.3}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn-solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-solid:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px}
+
+/* table */
+.table-scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:2px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:15px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{background:var(--paper);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.dep{color:var(--muted);font-size:13px}
+
+/* entries */
+.entry{max-width:800px;margin-inline:auto;text-align:center;padding-bottom:clamp(48px,6vw,72px);scroll-margin-top:96px}
+.entry + .entry{border-top:1px solid var(--rule);padding-top:clamp(48px,6vw,72px)}
+.entry-no{font-size:12px;letter-spacing:.18em;color:var(--muted)}
+.entry h2{margin:14px 0 14px}
+.entry-summary{color:var(--ink-2);font-size:clamp(17px,1.6vw,19px);max-width:56ch;margin-inline:auto}
+.facts{display:grid;grid-template-columns:132px 1fr;gap:14px 22px;margin:30px 0 0;text-align:left}
+.facts dt{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:.2em}
+.facts dd{margin:0;color:var(--ink-2)}
+.facts dd code{margin-right:2px}
+
+/* agent list */
+.agents{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--rule);border-radius:2px;background:var(--card)}
+.agent{background:var(--card);padding:24px 26px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.agent:nth-child(2n){border-right:0}
+.agent:nth-child(n+7){border-bottom:0}
+.agent h3{font-size:17px;margin-bottom:8px}
+.agent h3 code{font-size:15px}
+.agent p{font-size:15px;color:var(--ink-2)}
+.agent .flag{display:block;margin-top:12px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+
+.callout{max-width:800px;margin:36px auto 0;padding:24px 26px;border:1px solid var(--ink);border-radius:2px;background:var(--card);text-align:left}
+.callout p:first-child{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.callout p + p{margin-top:12px;color:var(--ink-2)}
+
+.copy{display:inline-flex;align-items:center;gap:14px;padding:14px 20px;border:1px solid var(--ink);border-radius:2px;background:var(--card);font-family:var(--serif);cursor:pointer}
+.copy:hover{border-color:var(--accent)}
+.copy code{background:none;border:0;padding:0;font-size:15px}
+.copy-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);min-width:52px;text-align:left}
+.copy.is-done .copy-label{color:var(--accent)}
+
+.site-foot{border-top:1px solid var(--rule);padding:44px 0}
+.foot-inner{display:flex;gap:18px 30px;flex-wrap:wrap;align-items:baseline;justify-content:center;text-align:center}
+.foot-inner a{display:inline-flex;align-items:center;text-decoration:none;font-size:15px;color:var(--ink-2)}
+.foot-inner a:hover{color:var(--accent)}
+.foot-note{width:100%;text-align:center;font-size:14px;color:var(--muted)}
+
+.js .reveal{opacity:0;transform:translateY(14px)}
+.js .reveal.is-in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+}
+@media (max-width:640px){
+  body{font-size:17px}
+  .nav{gap:10px 18px;padding:12px 0}
+  .facts{grid-template-columns:1fr;gap:6px 0}
+  .facts dt{padding-top:14px}
+  .facts dt:first-child{padding-top:0}
+  .agents{grid-template-columns:1fr}
+  .agents .agent{border-right:0;border-bottom:1px solid var(--rule)}
+  .agents .agent:last-child{border-bottom:0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Atelier</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="routers.html" aria-current="page">Routers</a>
+      <a href="install.html">Install</a>
+      <a href="about.html">About</a>
+      <a href="https://github.com/vietnamtrainingpilot-oss/atelier">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section" style="border-top:0">
+    <div class="wrap">
+      <div class="section-head reveal" style="margin-bottom:44px">
+        <h1>The eight routers</h1>
+        <p style="max-width:62ch;margin-inline:auto">One lead skill, at most two supports. Loading five design skills produces mush, not a better site — so the router commits to one, and says why.</p>
+      </div>
+
+      <div class="table-scroll reveal">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Router</th>
+              <th scope="col">Deps</th>
+              <th scope="col">Lead skill</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="#web-design">web-design</a></td><td class="dep">46</td><td><code>ai-ui-ux-motion-engine</code></td></tr>
+            <tr><td><a href="#video-production">video-production</a></td><td class="dep">25</td><td><code>hyperframes</code></td></tr>
+            <tr><td><a href="#seo">seo</a></td><td class="dep">12</td><td><code>seo-audit</code></td></tr>
+            <tr><td><a href="#backend">backend</a></td><td class="dep">15</td><td><code>ponytail</code></td></tr>
+            <tr><td><a href="#payments">payments</a></td><td class="dep">1</td><td><code>stripe-best-practices</code></td></tr>
+            <tr><td><a href="#security">security</a></td><td class="dep">1</td><td><code>claude-security</code></td></tr>
+            <tr><td><a href="#vibe-code">vibe-code</a></td><td class="dep">4</td><td><code>brainstorming</code></td></tr>
+            <tr><td><a href="#ship-it">ship-it</a></td><td class="dep">6</td><td><code>writing-plans</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <article class="entry reveal" id="web-design">
+        <h2>web-design</h2>
+        <p class="entry-summary">Landing pages, portfolios, redesigns, design systems, UI, and scroll or cinematic motion. Routes by job type, not by vibe.</p>
+        <dl class="facts">
+          <dt>Dependencies</dt><dd>46 skills</dd>
+          <dt>Lead skill</dt><dd><code>ai-ui-ux-motion-engine</code> — the default for a new landing page</dd>
+          <dt>Supports</dt><dd><code>ui-ux-pro-max</code> when the work is client-facing and palettes matter · <code>awwwards-animations</code> when the motion is the deliverable</dd>
+          <dt>Hands off to</dt><dd><code>video-production</code> — the visual system is decided once and both routers inherit it</dd>
+                    <dt>Example</dt><dd>&ldquo;Build me a landing page for my SaaS&rdquo; &rarr; lead <code>impeccable-design-polish</code>, supports <code>awwwards-animations</code> and <code>gsap-scrolltrigger</code>, handoff <code>video-production</code> for hero motion.</dd>
+<dt>Env vars</dt><dd>None required</dd>
+          <dt>MCP servers</dt><dd>Optional: <code>magicui</code>, <code>chrome-devtools</code>, <code>playwright</code></dd>
+          <dt>Note</dt><dd>Four aesthetic skills — <code>gpt-taste</code>, <code>industrial-brutalist-ui</code>, <code>minimalist-ui</code>, <code>high-end-visual-design</code> — each impose a different visual language. Running two produces a blend worse than either, so exactly one per job.</dd>
+        </dl>
+      </article>
+
+      <article class="entry reveal" id="video-production">
+        <h2>video-production</h2>
+        <p class="entry-summary">Three stacks, chosen by input. HyperFrames renders HTML to video; Remotion is there for projects that already live in React.</p>
+        <dl class="facts">
+          <dt>Dependencies</dt><dd>25 skills</dd>
+          <dt>Lead skill</dt><dd><code>hyperframes</code> — the mandatory entry point for every video request</dd>
+          <dt>Supports</dt><dd><code>general-video</code> when the input matches no named workflow · <code>media-use</code> to resolve music, SFX, imagery and voice into frozen local files</dd>
+          <dt>Hands off to</dt><dd><code>web-design</code> — for the type, palette and hero treatment the video has to match</dd>
+                    <dt>Example</dt><dd>&ldquo;Turn the PR we just merged into a video&rdquo; &rarr; lead <code>pr-to-video</code>. The input — a repository, not a topic — is what selects the workflow.</dd>
+<dt>Env vars</dt><dd>Optional: <code>HEYGEN_API_BASE</code> to route media resolution through a host app</dd>
+          <dt>MCP servers</dt><dd>None required</dd>
+          <dt>Note</dt><dd>The registry is searched before any named visual is hand-built — CRT scanlines, glitch, film grain, charts and terminal windows already exist as hosted blocks. <code>media-use</code> needs the heygen CLI for music and SFX.</dd>
+        </dl>
+      </article>
+
+      <article class="entry reveal" id="seo">
+        <h2>seo</h2>
+        <p class="entry-summary">An ordered pipeline, not a menu. Setup, audit, research, clustering, competitors, links, visibility, report — in that order.</p>
+        <dl class="facts">
+          <dt>Dependencies</dt><dd>12 skills</dd>
+          <dt>Lead skill</dt><dd><code>seo-audit</code></dd>
+          <dt>Supports</dt><dd><code>keyword-research</code> before any content decision · <code>seo-report</code> as the deliverable</dd>
+          <dt>Hands off to</dt><dd>—</dd>
+                    <dt>Example</dt><dd>&ldquo;Why is the client not ranking for the terms they bought?&rdquo; &rarr; lead <code>seo-audit</code>, then the pipeline runs in order and ends at <code>seo-report</code>.</dd>
+<dt>Env vars</dt><dd>None required</dd>
+          <dt>MCP servers</dt><dd>None required</dd>
+          <dt>Note</dt><dd>AI visibility is measured separately from Google rankings; one does not imply the other. The report is the output, not the audit — the audit is an input to it.</dd>
+        </dl>
+      </article>
+
+      <article class="entry reveal" id="backend">
+        <h2>backend</h2>
+        <p class="entry-summary">Understand, build, refactor, hand off. Orient cheaply before touching anything.</p>
+        <dl class="facts">
+          <dt>Dependencies</dt><dd>15 skills</dd>
+          <dt>Lead skill</dt><dd><code>ponytail</code> — YAGNI, stdlib first, no unrequested abstractions</dd>
+          <dt>Supports</dt><dd><code>smart-explore</code> as the cheap default for reading a codebase · <code>make-plan</code> when the work is large enough to need phases</dd>
+          <dt>Hands off to</dt><dd><code>payments</code> for money flows · <code>security</code> for anything taking untrusted input · <code>ship-it</code> to deploy</dd>
+                    <dt>Example</dt><dd>&ldquo;I want an agent that picks the right skill on its own&rdquo; &rarr; lead <code>ponytail</code>, supports <code>smart-explore</code> and <code>make-plan</code>, handoff <code>security</code> once untrusted input enters.</dd>
+<dt>Env vars</dt><dd>None required</dd>
+          <dt>MCP servers</dt><dd>None required</dd>
+          <dt>Note</dt><dd>No dedicated debugging skill is installed. The router documents an honest procedure instead of pretending one exists. Nothing here covers infrastructure-as-code, database migrations or observability either.</dd>
+        </dl>
+      </article>
+
+      <article class="entry reveal" id="payments">
+        <h2>payments</h2>
+        <p class="entry-summary">Stripe, from the official <code>stripe/ai</code> repository. Six reference files loaded on demand, never from memory.</p>
+        <dl class="facts">
+          <dt>Dependencies</dt><dd>1 skill, 6 references</dd>
+          <dt>Lead skill</dt><dd><code>stripe-best-practices</code></dd>
+          <dt>Supports</dt><dd>—</dd>
+          <dt>Hands off to</dt><dd>—</dd>
+                    <dt>Example</dt><dd>&ldquo;Add annual billing with a proration on upgrade&rdquo; &rarr; lead <code>stripe-best-practices</code>, Billing and Tax references loaded on demand. Never from memory.</dd>
+<dt>Env vars</dt><dd><code>STRIPE_SECRET_KEY</code> · <code>STRIPE_WEBHOOK_SECRET</code></dd>
+          <dt>MCP servers</dt><dd>None required</dd>
+          <dt>Note</dt><dd>Enforced non-negotiables: verify webhook signatures, use an idempotency key on every write, work in integer minor units, never store card numbers, never commit keys.</dd>
+        </dl>
+      </article>
+
+      <article class="entry reveal" id="security">
+        <h2>security</h2>
+        <p class="entry-summary">Anthropic's <code>claude-security</code> with its orchestrator rebuilt as a documented dispatch order, plus the eight subagents it dispatches.</p>
+        <dl class="facts">
+          <dt>Dependencies</dt><dd>1 skill, 8 subagents</dd>
+          <dt>Lead skill</dt><dd><code>claude-security</code></dd>
+          <dt>Supports</dt><dd><code>cs-scan-inventory</code> to partition the tree · <code>cs-scan-researcher</code> to pursue each candidate</dd>
+          <dt>Hands off to</dt><dd>—</dd>
+                    <dt>Example</dt><dd>&ldquo;Audit the site before I ship it&rdquo; &rarr; lead <code>claude-security</code>, supports <code>cs-scan-inventory</code> and <code>cs-scan-researcher</code>, handoff <code>ship-it</code>, which will not pass verification without it.</dd>
+<dt>Env vars</dt><dd>None required</dd>
+          <dt>MCP servers</dt><dd>None required</dd>
+          <dt>Note</dt><dd>Six of the eight agents are read-only with <code>edit: deny</code>. Findings are verified before they are patched, because unverified findings are usually wrong. Credentials are redacted before anything leaves the machine.</dd>
+        </dl>
+      </article>
+
+      <article class="entry reveal" id="vibe-code">
+        <h2>vibe-code</h2>
+        <p class="entry-summary">Fast path from a vague idea to something running. One question maximum, then look at the result before claiming it works.</p>
+        <dl class="facts">
+          <dt>Dependencies</dt><dd>4 skills</dd>
+          <dt>Lead skill</dt><dd><code>brainstorming</code></dd>
+          <dt>Supports</dt><dd><code>ponytail</code> to keep the code short · <code>design-taste-frontend</code> so the result is not visibly generic</dd>
+          <dt>Hands off to</dt><dd><code>payments</code> or <code>security</code> — the moment the work turns into auth, money or a security surface</dd>
+                    <dt>Example</dt><dd>&ldquo;Something with a login and a feed, make it feel nice&rdquo; &rarr; lead <code>brainstorming</code>. One question maximum, then it stops when it runs.</dd>
+<dt>Env vars</dt><dd>None required</dd>
+          <dt>MCP servers</dt><dd>None required</dd>
+          <dt>Note</dt><dd>Deliberately skips <code>make-plan</code>, <code>writing-plans</code> and <code>subagent-driven-development</code>. This router exists to be the opposite of <code>ship-it</code>, and it escalates honestly rather than pretending the work stayed small.</dd>
+        </dl>
+      </article>
+
+      <article class="entry reveal" id="ship-it">
+        <h2>ship-it</h2>
+        <p class="entry-summary">The process spine. It owns the sequence; the other seven routers are its stages.</p>
+        <dl class="facts">
+          <dt>Dependencies</dt><dd>6 skills</dd>
+          <dt>Lead skill</dt><dd><code>writing-plans</code></dd>
+          <dt>Supports</dt><dd><code>executing-plans</code> to run the phases · <code>verification-before-completion</code> to hold stage four</dd>
+          <dt>Hands off to</dt><dd><code>web-design</code> · <code>video-production</code> · <code>seo</code> · <code>payments</code> · <code>security</code> · <code>backend</code></dd>
+                    <dt>Example</dt><dd>&ldquo;Ship the thing we built last week&rdquo; &rarr; lead <code>writing-plans</code>, supports <code>executing-plans</code> and <code>verification-before-completion</code>. Verification is a gate.</dd>
+<dt>Env vars</dt><dd>None required</dd>
+          <dt>MCP servers</dt><dd>None required</dd>
+          <dt>Note</dt><dd>Decide, plan, build, verify, secure, perform, ship. Verification is a hard gate, not a step — most bad delivery is a skipped verification rather than a missing feature.</dd>
+        </dl>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>The eight security subagents</h2>
+        <p>Dispatched in order. Findings are verified before they are patched, and redacted before they leave the machine.</p>
+      </div>
+
+      <div class="agents reveal">
+        <div class="agent">
+          <h3><code>cs-scan-inventory</code></h3>
+          <p>Read-only cartographer. Partitions the repository into components and accounts for every top-level directory.</p>
+          <span class="flag">Read-only</span>
+        </div>
+        <div class="agent">
+          <h3><code>cs-scan-researcher</code></h3>
+          <p>Read-only. Turns one partitioned component into candidate findings with evidence.</p>
+          <span class="flag">Read-only</span>
+        </div>
+        <div class="agent">
+          <h3><code>cs-scan-verifier</code></h3>
+          <p>Read-only. Votes on a single candidate — the filter that removes the findings that would have been wrong.</p>
+          <span class="flag">Read-only</span>
+        </div>
+        <div class="agent">
+          <h3><code>cs-scan-loader</code></h3>
+          <p>Read-only. Returns one JSON file from the run directory so each job reads a fixed artifact.</p>
+          <span class="flag">Read-only</span>
+        </div>
+        <div class="agent">
+          <h3><code>cs-scan-redactor</code></h3>
+          <p>Read-only. Replaces credential values in finished reports with <code>[REDACTED]</code>.</p>
+          <span class="flag">Read-only</span>
+        </div>
+        <div class="agent">
+          <h3><code>cs-explore</code></h3>
+          <p>Read-only. Maps where a flow is wired and every caller of a symbol, for questions the scan itself does not answer.</p>
+          <span class="flag">Read-only</span>
+        </div>
+        <div class="agent">
+          <h3><code>cs-patch-generator</code></h3>
+          <p>Writes. Implements one finding inside a scratch workspace and stages it as a reviewable patch file.</p>
+          <span class="flag">Writes</span>
+        </div>
+        <div class="agent">
+          <h3><code>cs-patch-verifier</code></h3>
+          <p>Writes. Reviews the staged diff against the finding, runs the tests, and states the claims a patch has to earn.</p>
+          <span class="flag">Writes</span>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <p>The honest limitation</p>
+        <p>Upstream, <code>claude-security</code> orchestrates its agents with Claude Code's <code>Workflow(...)</code> engine. That engine does not exist in opencode, so there is no one-click <code>/security</code> scan here. What the router ships instead is the dispatch order itself, documented above: inventory → research → verify → generate → verify patch. Running it means running those agents in sequence.</p>
+        <p>Six of the eight are read-only, which is the point — a scan that cannot write cannot damage the thing it is scanning.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap center">
+      <div class="reveal">
+        <h2>Install the stack.</h2>
+        <p class="lede" style="max-width:52ch;margin:16px auto 0">One line installs all eight routers, or name a single one.</p>
+        <p style="margin-top:34px">
+          <button class="copy" type="button" data-copy="node install.mjs"><code>node install.mjs</code><span class="copy-label">Copy</span></button>
+        </p>
+        <div class="actions" style="margin-top:28px">
+          <a class="btn" href="install.html">Install guide →</a>
+          <a class="btn" href="about.html">Why Atelier exists →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 15 16 6l10 9v11h-7v-6h-6v6H6z" fill="currentColor"/></svg>Atelier</a>
+    <a href="routers.html">Routers</a>
+    <a href="install.html">Install</a>
+    <a href="about.html">About</a>
+    <a href="https://github.com/vietnamtrainingpilot-oss/atelier">GitHub ↗</a>
+    <p class="foot-note">MIT licensed. Skills belong to their original authors.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  document.documentElement.classList.add('js');
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function show(el) { el.classList.add('is-in'); }
+  var revealables = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+
+  if (reduced.matches || !('IntersectionObserver' in window)) {
+    revealables.forEach(show);
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { show(entry.target); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    revealables.forEach(function (el) { io.observe(el); });
+
+    setTimeout(function () {
+      revealables.forEach(function (el) {
+        if (el.getBoundingClientRect().top < window.innerHeight * 1.25) show(el);
+      });
+    }, 1200);
+
+    window.addEventListener('pagehide', function () { io.disconnect(); });
+  }
+
+  var head = document.querySelector('.site-head');
+  if (head && 'IntersectionObserver' in window) {
+    var sentinel = document.createElement('div');
+    sentinel.setAttribute('aria-hidden', 'true');
+    sentinel.style.cssText = 'position:absolute;top:0;width:1px;height:1px;';
+    document.body.prepend(sentinel);
+    new IntersectionObserver(function (entries) {
+      head.classList.toggle('is-stuck', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(sentinel);
+  }
+
+  function flash(button, label) {
+    var slot = button.querySelector('.copy-label');
+    if (!slot) return;
+    var was = slot.textContent;
+    slot.textContent = label;
+    button.classList.add('is-done');
+    window.setTimeout(function () { slot.textContent = was; button.classList.remove('is-done'); }, 1600);
+  }
+  function legacyCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:-9999px;';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var text = button.getAttribute('data-copy') || '';
+      function done(ok) { flash(button, ok ? 'Copied' : 'Ctrl+C'); }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(legacyCopy(text)); });
+      } else { done(legacyCopy(text)); }
+    });
+  });
+
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest ? event.target.closest('a[href^="#"]') : null;
+    if (!link) return;
+    var id = link.getAttribute('href').slice(1);
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth', block: 'start' });
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+  });
+})();
+</script>
+</body>
+</html>
