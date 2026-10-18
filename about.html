@@ -32,9 +32,9 @@ body{
 }
 main,.section,.site-head,.site-foot{background:var(--paper)}
 h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;margin:0}
-h1{font-size:clamp(34px,6.2vw,62px);line-height:1.06}
-h2{font-size:clamp(26px,3.6vw,38px);line-height:1.14}
-h3{font-size:clamp(19px,2.1vw,22px);line-height:1.26}
+h1{font-size:clamp(36px,5.4vw,58px);line-height:1.06;letter-spacing:-.02em}
+h2{font-size:26px;line-height:1.18;letter-spacing:-.012em}
+h3{font-size:20px;line-height:1.28}
 p{margin:0}
 a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:3px}
 a:hover{color:var(--accent);text-decoration-color:var(--accent)}
@@ -46,8 +46,11 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
 .eyebrow{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
 .lede{font-size:clamp(17px,1.55vw,20px);color:var(--ink-2)}
 .muted{color:var(--muted)}
-.section{padding:clamp(60px,8vw,112px) 0;border-top:1px solid var(--rule)}
-.section-head{text-align:center;margin-bottom:clamp(34px,5vw,56px)}
+.section{padding:88px 0;border-top:1px solid var(--rule)}
+.section.tight{padding:60px 0}
+.section.roomy{padding:132px 0}
+.section.airy{padding:164px 0}
+.section-head{text-align:center;margin-bottom:42px}
 .section-head p{margin-top:16px;color:var(--ink-2)}
 .skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--paper);border:1px solid var(--ink);border-radius:2px;padding:10px 16px;text-decoration:none}
 .skip:focus{left:12px;top:12px;color:var(--accent);border-color:var(--accent)}
@@ -98,6 +101,13 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
 }
 @media (max-width:640px){
   body{font-size:17px}
+  h1{font-size:34px}
+  h2{font-size:22px}
+  h3{font-size:18px}
+  .section{padding:56px 0}
+  .section.tight{padding:40px 0}
+  .section.roomy{padding:80px 0}
+  .section.airy{padding:92px 0}
   .nav{gap:10px 18px;padding:12px 0}
   .values{grid-template-columns:1fr}
   .values .value{border-right:0;border-bottom:1px solid var(--rule)}
@@ -123,7 +133,7 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
 
 <main id="main">
 
-  <section class="section" style="border-top:0">
+  <section class="section roomy" style="border-top:0>>
     <div class="wrap">
       <div class="center">
         <p class="eyebrow reveal">About</p>
@@ -149,7 +159,7 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
     </div>
   </section>
 
-  <section class="section">
+  <section class="section tight">
     <div class="wrap">
       <div class="section-head reveal">
         <h2>What it values</h2>
@@ -172,7 +182,7 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
     </div>
   </section>
 
-  <section class="section">
+  <section class="section roomy">
     <div class="wrap">
       <div class="section-head reveal">
         <h2>The eight domains</h2>
@@ -216,7 +226,7 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
     </div>
   </section>
 
-  <section class="section">
+  <section class="section tight">
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Security, and what it cannot do</h2>
@@ -231,7 +241,7 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
     </div>
   </section>
 
-  <section class="section">
+  <section class="section airy">
     <div class="wrap center">
       <div class="reveal">
 <h2>Judge it on one line.</h2>
