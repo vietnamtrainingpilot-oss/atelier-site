@@ -3,9 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F2EC'/%3E%3Cpath d='M8 14 16 8l8 6v10h-6v-6h-4v6H8z' fill='%23B4552D'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F2EC'/%3E%3Cpath d='M8 14 16 8l8 6v10h-6v-6h-4v6H8z' fill='%23AC4F27'/%3E%3C/svg%3E">
 <title>Routers — Atelier</title>
 <meta name="description" content="All eight Atelier routers: dependency counts, lead skills, supports, hand-offs, environment variables and MCP servers.">
+<meta name="theme-color" content="#F5F2EC">
+<link rel="canonical" href="https://vietnamtrainingpilot-oss.github.io/atelier-site/routers.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Atelier">
+<meta property="og:title" content="Routers — Atelier">
+<meta property="og:description" content="All eight Atelier routers: dependency counts, lead skills, supports, hand-offs, environment variables and MCP servers.">
+<meta property="og:url" content="https://vietnamtrainingpilot-oss.github.io/atelier-site/routers.html">
+<meta name="twitter:card" content="summary">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 :root{
@@ -15,7 +23,7 @@
   --muted:#6E675C;
   --rule:#D8D2C6;
   --card:#FBF9F4;
-  --accent:#B4552D;
+  --accent:#AC4F27;
   --tint:#F6ECE5;
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
@@ -58,11 +66,11 @@ code{font-family:var(--mono);font-size:.8em;letter-spacing:-.01em;background:var
 :target{scroll-margin-top:96px}
 .site-head{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid transparent}
 .site-head.is-stuck{border-bottom-color:var(--rule)}
-.nav{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;padding:15px 0}
+.nav{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;padding:7px 0}
 .brand{display:inline-flex;align-items:center;text-decoration:none;font-size:17px;white-space:nowrap}
 .mark{display:inline-block;vertical-align:-.05em;width:.8em;height:.8em;margin-right:.34em;color:var(--accent);flex:0 0 auto}
 .nav-links{margin-left:auto;display:flex;align-items:baseline;gap:clamp(14px,2.4vw,26px);flex-wrap:wrap}
-.nav-links a{text-decoration:none;font-size:15px;color:var(--ink-2)}
+.nav-links a{text-decoration:none;font-size:15px;color:var(--ink-2);padding:10px 0}
 .nav-links a:hover,.nav-links a[aria-current]{color:var(--accent)}
 .btn{display:inline-block;padding:12px 22px;border:1px solid var(--ink);border-radius:2px;background:transparent;color:var(--ink);font-family:var(--serif);font-size:16px;text-decoration:none;cursor:pointer;line-height:1.3}
 .btn:hover{border-color:var(--accent);color:var(--accent)}
@@ -103,7 +111,7 @@ td.dep{color:var(--muted);font-size:13px}
 .callout p:first-child{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 .callout p + p{margin-top:12px;color:var(--ink-2)}
 
-.copy{display:inline-flex;align-items:center;gap:12px;padding:9px 16px;border:1px solid var(--rule);border-radius:2px;background:var(--paper);font-family:var(--serif);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap}
+.copy{display:inline-flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid var(--rule);border-radius:2px;background:var(--paper);font-family:var(--serif);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;min-height:44px;white-space:nowrap}
 .copy:hover{border-color:var(--accent);color:var(--accent)}
 .copy.is-done{color:var(--accent);border-color:var(--accent)}
 .copy:active{background:var(--paper)}
@@ -115,7 +123,7 @@ td.dep{color:var(--muted);font-size:13px}
 
 .site-foot{border-top:1px solid var(--rule);padding:44px 0}
 .foot-inner{display:flex;gap:18px 30px;flex-wrap:wrap;align-items:baseline;justify-content:center;text-align:center}
-.foot-inner a{display:inline-flex;align-items:center;text-decoration:none;font-size:15px;color:var(--ink-2)}
+.foot-inner a{display:inline-flex;align-items:center;text-decoration:none;font-size:15px;color:var(--ink-2);padding:11px 0}
 .foot-inner a:hover{color:var(--accent)}
 .foot-note{width:100%;text-align:center;font-size:14px;color:var(--muted)}
 
@@ -137,7 +145,7 @@ td.dep{color:var(--muted);font-size:13px}
   .section.tight{padding:40px 0}
   .section.roomy{padding:80px 0}
   .section.airy{padding:92px 0}
-  .nav{gap:10px 18px;padding:12px 0}
+  .nav{gap:10px 18px;padding:7px 0}
   .facts{grid-template-columns:1fr;gap:6px 0}
   .facts dt{padding-top:14px}
   .facts dt:first-child{padding-top:0}

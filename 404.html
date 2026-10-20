@@ -3,9 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F2EC'/%3E%3Cpath d='M8 14 16 8l8 6v10h-6v-6h-4v6H8z' fill='%23B4552D'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F2EC'/%3E%3Cpath d='M8 14 16 8l8 6v10h-6v-6h-4v6H8z' fill='%23AC4F27'/%3E%3C/svg%3E">
 <title>Page not found — Atelier</title>
 <meta name="description" content="That page does not exist.">
+<meta name="theme-color" content="#F5F2EC">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Atelier">
+<meta property="og:title" content="Page not found — Atelier">
+<meta property="og:description" content="That page does not exist.">
+<meta name="twitter:card" content="summary">
 <meta name="robots" content="noindex">
 <style>
 *,*::before,*::after{box-sizing:border-box}
@@ -16,7 +22,7 @@
   --muted:#6E675C;
   --rule:#D8D2C6;
   --card:#FBF9F4;
-  --accent:#B4552D;
+  --accent:#AC4F27;
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
 }
@@ -48,11 +54,11 @@ code{font-family:var(--mono);font-size:.8em;background:var(--card);border:1px so
 .skip:focus{left:12px;top:12px;color:var(--accent);border-color:var(--accent)}
 :target{scroll-margin-top:96px}
 .site-head{border-bottom:1px solid var(--rule)}
-.nav{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;padding:15px 0}
+.nav{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;padding:7px 0}
 .brand{display:inline-flex;align-items:center;text-decoration:none;font-size:17px;white-space:nowrap}
 .mark{display:inline-block;vertical-align:-.05em;width:.8em;height:.8em;margin-right:.34em;color:var(--accent);flex:0 0 auto}
 .nav-links{margin-left:auto;display:flex;align-items:baseline;gap:clamp(14px,2.4vw,26px);flex-wrap:wrap}
-.nav-links a{text-decoration:none;font-size:15px;color:var(--ink-2)}
+.nav-links a{text-decoration:none;font-size:15px;color:var(--ink-2);padding:10px 0}
 .nav-links a:hover{color:var(--accent)}
 .notfound{min-height:58vh;display:flex;align-items:center;padding:clamp(64px,10vw,120px) 0}
 .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
@@ -62,7 +68,7 @@ code{font-family:var(--mono);font-size:.8em;background:var(--card);border:1px so
 .btn-solid:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
 .site-foot{border-top:1px solid var(--rule);padding:44px 0}
 .foot-inner{display:flex;gap:18px 30px;flex-wrap:wrap;align-items:baseline;justify-content:center;text-align:center}
-.foot-inner a{display:inline-flex;align-items:center;text-decoration:none;font-size:15px;color:var(--ink-2)}
+.foot-inner a{display:inline-flex;align-items:center;text-decoration:none;font-size:15px;color:var(--ink-2);padding:11px 0}
 .foot-inner a:hover{color:var(--accent)}
 .foot-note{width:100%;text-align:center;font-size:14px;color:var(--muted)}
 .credit{width:100%;text-align:center;font-size:13px;color:var(--muted);margin-top:10px}
@@ -71,7 +77,7 @@ code{font-family:var(--mono);font-size:.8em;background:var(--card);border:1px so
 @media (max-width:640px){
   body{font-size:17px}
   h1{font-size:34px}
-  .nav{gap:10px 18px;padding:12px 0}
+  .nav{gap:10px 18px;padding:7px 0}
 }
 </style>
 </head>
